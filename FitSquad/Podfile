@@ -7,6 +7,7 @@ target 'FitSquad' do
 
   # Pods for FitSquad
   pod 'Firebase/Core'
+  pod 'FBSDKLoginKit'
   
   target 'FitSquadTests' do
     inherit! :search_paths
