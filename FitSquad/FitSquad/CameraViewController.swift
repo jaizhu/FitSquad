@@ -9,10 +9,9 @@
 import Foundation
 import AVFoundation
 import UIKit
-import Firebase
+import FirebaseDatabase
 
 class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate{
-    // let firebase = Firebase(url:"https://fit-squad.firebaseio.com/photos")
     
     @IBOutlet weak var captureImageView: UIImageView!
     @IBOutlet weak var previewView: UIView!
@@ -65,6 +64,8 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate{
     // callBack from take picture
     func capture(_ captureOutput: AVCapturePhotoOutput, didFinishProcessingPhotoSampleBuffer photoSampleBuffer: CMSampleBuffer?, previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings, bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?) {
         
+        save()
+        
         if let error = error {
             print("error occured : \(error.localizedDescription)")
         }
@@ -83,6 +84,30 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate{
             print("some error here")
         }
     }
+    
+    @IBAction func save() {
+        let firebase = FIRDatabase.database().reference()
+        let user = "testUser"   // TODO: Get User
+        var data: NSData = NSData()
+        
+        if let image = captureImageView.image {
+            data = UIImageJPEGRepresentation(image,0.1)! as NSData
+        }
+        
+        let base64String = data.base64EncodedString()
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = NSLocale.current
+        dateFormatter.dateStyle = .medium
+        let dateString = dateFormatter.string(from: Date()) // TODO: Should it be full date & time?
+        
+        let photo: NSDictionary = ["user": user,"date": dateString, "photoBase64":base64String]
+        
+        // write
+        firebase.ref.child("photos").childByAutoId().setValue(photo)
+        
+    }
+
     
     // This method you can use somewhere you need to know camera permission   state
     func askPermission() {
