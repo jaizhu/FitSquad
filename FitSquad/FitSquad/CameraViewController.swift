@@ -9,8 +9,10 @@
 import Foundation
 import AVFoundation
 import UIKit
+import Firebase
 
 class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate{
+    // let firebase = Firebase(url:"https://fit-squad.firebaseio.com/photos")
     
     @IBOutlet weak var captureImageView: UIImageView!
     @IBOutlet weak var previewView: UIView!
@@ -27,7 +29,7 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate{
         captureSession.sessionPreset = AVCaptureSessionPresetPhoto
         cameraOutput = AVCapturePhotoOutput()
         
-        let device = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
+        let device = AVCaptureDevice.defaultDevice(withDeviceType: .builtInWideAngleCamera, mediaType: AVMediaTypeVideo, position: .front)
         
         if let input = try? AVCaptureDeviceInput(device: device) {
             if (captureSession.canAddInput(input)) {
