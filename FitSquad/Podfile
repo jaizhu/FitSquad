@@ -7,6 +7,9 @@ target 'FitSquad' do
 
   # Pods for FitSquad
   pod 'Firebase/Core'
+  pod 'FacebookCore'
+  pod 'FacebookLogin'
+  pod 'FacebookShare'
   
   target 'FitSquadTests' do
     inherit! :search_paths

@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import FacebookLogin
 
 class LoginViewController: UIViewController {
     
@@ -16,6 +17,11 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         print("login view loaded")
+        
+        let loginButton = LoginButton(readPermissions: [ .publicProfile ])
+        loginButton.center = view.center
+        
+        view.addSubview(loginButton)
     }
     
     override func didReceiveMemoryWarning() {
