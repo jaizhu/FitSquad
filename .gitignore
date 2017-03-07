@@ -19,3 +19,4 @@ DerivedData
 .idea/
 # Pods - if we want to use CocoaPods
 # FitSquad/Pods/
+FitSquad/Assets.xcassets/AppIcon.appiconset/Contents.json

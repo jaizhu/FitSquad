@@ -150,17 +150,17 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <segue destination="QY8-NM-jwc" kind="show" identifier="ToHome" id="Uw2-ad-Ncn"/>
+                        <segue destination="QY8-NM-jwc" kind="show" identifier="toHome" id="v8k-HB-haa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Wx-6D-fVQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2042" y="-50"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar-->
         <scene sceneID="vPJ-IK-kGq">
             <objects>
-                <tabBarController id="QY8-NM-jwc" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="mainTabBar" title="Tab Bar" id="QY8-NM-jwc" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="yaf-gQ-Gj7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

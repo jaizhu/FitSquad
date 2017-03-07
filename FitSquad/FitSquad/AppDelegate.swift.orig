@@ -8,26 +8,37 @@
 
 import UIKit
 import Firebase
+<<<<<<< HEAD
 import FirebaseDatabase
+=======
 import FacebookLogin
 import FBSDKCoreKit
 import FBSDKLoginKit
 import FacebookCore
+>>>>>>> 45aae4170b4963de1f5b1ed7d5ab1ebb095af99c
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
+<<<<<<< HEAD
     override init() {
         FIRApp.configure()
         FIRDatabase.database().persistenceEnabled = true
     }
     
     
-
+    private func application(application: UIApplication,
+                             didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?)
+        -> Bool {
+            return true
+=======
     private func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         FIRApp.configure()
+        
+        // Facebook stuff
+//        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
         return true
     }
@@ -35,6 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
+>>>>>>> 45aae4170b4963de1f5b1ed7d5ab1ebb095af99c
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
