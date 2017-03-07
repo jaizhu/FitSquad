@@ -7,21 +7,21 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>339097831337-8p9r818au39quio331iiqo0cabj5sphn.apps.googleusercontent.com</string>
+	<string>724851211893-3q79d0kjlfvmefid0k6pkm3kgfle5l45.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.339097831337-8p9r818au39quio331iiqo0cabj5sphn</string>
+	<string>com.googleusercontent.apps.724851211893-3q79d0kjlfvmefid0k6pkm3kgfle5l45</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBr5hfjcSu1N_71UYtWRscFQip3T63jWqE</string>
+	<string>AIzaSyA7-FAMEOusFM0D3290S3pqjf6Vchtn4nk</string>
 	<key>GCM_SENDER_ID</key>
-	<string>339097831337</string>
+	<string>724851211893</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.dogdogdog.FitSquad</string>
 	<key>PROJECT_ID</key>
-	<string>fit-squad</string>
+	<string>fitsquad-33a4b</string>
 	<key>STORAGE_BUCKET</key>
-	<string>fit-squad.appspot.com</string>
+	<string>fitsquad-33a4b.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<true/>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -33,8 +33,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:339097831337:ios:391d4d92d4affbf6</string>
+	<string>1:724851211893:ios:391d4d92d4affbf6</string>
 	<key>DATABASE_URL</key>
-	<string>https://fit-squad.firebaseio.com</string>
+	<string>https://fitsquad-33a4b.firebaseio.com</string>
 </dict>
 </plist>
