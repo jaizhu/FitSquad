@@ -11,7 +11,6 @@ import UIKit
 class TeamMemberTableViewController: UITableViewController {
     
     var members = [Member]()
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,24 +26,40 @@ class TeamMemberTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        // TODO: Make this 2 (to display one section for each team)
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return members.count
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        
+        let cellIdentifier = "TeamMemberTableViewCell"
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? TeamMemberTableViewCell else {
+            fatalError("The dequeued cell is not an instance of TeamMemberTableViewCell.")
+        }
 
-        // Configure the cell...
+        let member = members[indexPath.row]
+        
+        cell.nameLabel.text = member.name
+//        cell.gymPhotoImageView.image = member.photo
+//
+//        cell.checkmarkImageView.image = UIImage(named: "Xmark")
+        
+        // TODO: Set checkmark if member has already participated
+        if member.participated {
+            cell.checkmarkImageView.image = UIImage(named: "Checkmark")
+            cell.gymPhotoImageView.image = member.photo
+        }
+        else {
+            cell.checkmarkImageView.image = UIImage(named: "Xmark")
+        }
 
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.
@@ -96,7 +111,7 @@ class TeamMemberTableViewController: UITableViewController {
     
     private func loadSampleTeam() {
         
-        guard let rachel = Member(name: "Rachel", photo: UIImage(named: "RachelGym"), participated: false) else {
+        guard let rachel = Member(name: "Rachel", photo: UIImage(named: "RachelGym"), participated: true) else {
             fatalError("Unable to instantiate Rachel")
         }
         
