@@ -7,116 +7,73 @@
 //
 
 import Foundation
-import AVFoundation
 import UIKit
 import FirebaseDatabase
+import AVFoundation
 
-class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate{
+class CameraViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
-    @IBOutlet weak var captureImageView: UIImageView!
-    @IBOutlet weak var previewView: UIView!
+    @IBOutlet weak var imageView: UIImageView!
     
-    var captureSession: AVCaptureSession!
-    var cameraOutput: AVCapturePhotoOutput!
-    var previewLayer: AVCaptureVideoPreviewLayer!
+    var imagePicker: UIImagePickerController!
+    
+    @IBAction func takePhoto(_ sender: Any) {
+        askPermission()
+        imagePicker =  UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .camera
+        present(imagePicker, animated: true, completion: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        askPermission()
-        
-        captureSession = AVCaptureSession()
-        captureSession.sessionPreset = AVCaptureSessionPresetPhoto
-        cameraOutput = AVCapturePhotoOutput()
-        
-        let device = AVCaptureDevice.defaultDevice(withDeviceType: .builtInWideAngleCamera, mediaType: AVMediaTypeVideo, position: .front)
-        
-        if let input = try? AVCaptureDeviceInput(device: device) {
-            if (captureSession.canAddInput(input)) {
-                captureSession.addInput(input)
-                if (captureSession.canAddOutput(cameraOutput)) {
-                    captureSession.addOutput(cameraOutput)
-                    previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-                     previewLayer.frame = previewView.bounds
-                     previewView.layer.addSublayer(previewLayer)
-                    captureSession.startRunning()
-                }
-            } else {
-                print("issue here : captureSesssion.canAddInput")
-            }
-        } else {
-            print("some problem here")
-        }
+        // Do any additional setup after loading the view, typically from a nib.
     }
     
-    // Take picture button
-    @IBAction func didPressTakePhoto(_ sender: UIButton) {
-        let settings = AVCapturePhotoSettings()
-        let previewPixelType = settings.availablePreviewPhotoPixelFormatTypes.first!
-        let previewFormat = [
-            kCVPixelBufferPixelFormatTypeKey as String: previewPixelType,
-            kCVPixelBufferWidthKey as String: 160,
-            kCVPixelBufferHeightKey as String: 160
-        ]
-        settings.previewPhotoFormat = previewFormat
-        cameraOutput.capturePhoto(with: settings, delegate: self)
-    }
-    
-    // callBack from take picture
-    func capture(_ captureOutput: AVCapturePhotoOutput, didFinishProcessingPhotoSampleBuffer photoSampleBuffer: CMSampleBuffer?, previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings, bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?) {
-        
-        save()
-        
-        if let error = error {
-            print("error occured : \(error.localizedDescription)")
-        }
-        
-        if  let sampleBuffer = photoSampleBuffer,
-            let previewBuffer = previewPhotoSampleBuffer,
-            let dataImage =  AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer:  sampleBuffer, previewPhotoSampleBuffer: previewBuffer) {
-            print(UIImage(data: dataImage)?.size as Any)
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        if let image = info[UIImagePickerControllerOriginalImage] {
+            imagePicker.dismiss(animated: true, completion: nil)
+            imageView.image = image as? UIImage
             
-            let dataProvider = CGDataProvider(data: dataImage as CFData)
-            let cgImageRef: CGImage! = CGImage(jpegDataProviderSource: dataProvider!, decode: nil, shouldInterpolate: true, intent: .defaultIntent)
-            let image = UIImage(cgImage: cgImageRef, scale: 1.0, orientation: UIImageOrientation.right)
+            let firebase = FIRDatabase.database().reference()
+            let user = "testUser1"   // TODO: Get User
+            var data: NSData = NSData()
             
-            self.captureImageView.image = image
-        } else {
-            print("some error here")
+            // Save photo to Firebase
+            data = UIImageJPEGRepresentation(image as! UIImage, 0.1)! as NSData
+            
+            let base64String = data.base64EncodedString()
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.locale = NSLocale.current
+            dateFormatter.dateStyle = .medium
+            let dateString = dateFormatter.string(from: Date()) // TODO: Should it be full date & time?
+            
+            let photo: NSDictionary = ["user": user,"date": dateString, "photoBase64":base64String]
+            
+            // Write
+            firebase.ref.child("photos").childByAutoId().setValue(photo)
+            
         }
-    }
-    
-    @IBAction func save() {
-        let firebase = FIRDatabase.database().reference()
-        let user = "testUser"   // TODO: Get User
-        var data: NSData = NSData()
-        
-        if let image = captureImageView.image {
-            data = UIImageJPEGRepresentation(image,0.1)! as NSData
-        }
-        
-        let base64String = data.base64EncodedString()
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = NSLocale.current
-        dateFormatter.dateStyle = .medium
-        let dateString = dateFormatter.string(from: Date()) // TODO: Should it be full date & time?
-        
-        let photo: NSDictionary = ["user": user,"date": dateString, "photoBase64":base64String]
-        
-        // write
-        firebase.ref.child("photos").childByAutoId().setValue(photo)
-        
-    }
 
+    }
     
-    // This method you can use somewhere you need to know camera permission   state
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+   
+    // Camera permission
     func askPermission() {
-        print("here")
         let cameraPermissionStatus =  AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
         
         switch cameraPermissionStatus {
         case .authorized:
-            print("Already Authorized")
+            print("already authorized")
         case .denied:
             print("denied")
             
@@ -147,12 +104,13 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate{
                         let alert = UIAlertController(title: "WHY?" , message:  "Camera it is the main feature of our application", preferredStyle: .alert)
                         let action = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
                         alert.addAction(action)
-                        self?.present(alert, animated: true, completion: nil)  
-                    } 
+                        self?.present(alert, animated: true, completion: nil)
+                    }
                 }
             });
         }
     }
+
 }
 
 

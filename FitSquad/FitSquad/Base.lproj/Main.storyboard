@@ -50,30 +50,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GGG-tT-7g8">
-                                <rect key="frame" x="260" y="505" width="99" height="105"/>
+                                <rect key="frame" x="43" y="28" width="283" height="506"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tZu-sN-ayS">
-                                <rect key="frame" x="82" y="542" width="77" height="30"/>
+                                <rect key="frame" x="149" y="562" width="77" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Take Photo"/>
                                 <connections>
-                                    <action selector="didPressTakePhoto:" destination="LZT-I8-wt3" eventType="touchUpInside" id="cCZ-yI-32K"/>
+                                    <action selector="takePhoto:" destination="LZT-I8-wt3" eventType="touchUpInside" id="qee-ma-TjR"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sKv-5S-vne">
-                                <rect key="frame" x="31" y="38" width="328" height="459"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Camera" id="ysO-0M-3Ip"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="captureImageView" destination="GGG-tT-7g8" id="C73-Ux-h1k"/>
-                        <outlet property="previewView" destination="sKv-5S-vne" id="3y9-Yo-6zn"/>
+                        <outlet property="imageView" destination="GGG-tT-7g8" id="h9Q-LV-Kw2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZXO-FB-Tfa" userLabel="First Responder" sceneMemberID="firstResponder"/>
