@@ -25,7 +25,6 @@ class LoginViewController: UIViewController {
         
         let loginButton = LoginButton(readPermissions: [ .publicProfile, .email, .userFriends ])
         loginButton.center = view.center
-        
         view.addSubview(loginButton)
         
         // Check if user is already logged in
@@ -40,7 +39,6 @@ class LoginViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         if (FBSDKAccessToken.current() != nil && fbLoginSuccess == true) {
-//            performSegueWithIdentifier("loginSegue", sender: self)
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: "mainTabBar") as UIViewController
             self.present(viewController, animated: true, completion: nil)
         }
