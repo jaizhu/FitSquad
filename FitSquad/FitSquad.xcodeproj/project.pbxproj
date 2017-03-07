@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0208F7C81E6F2CF9009FB2A4 /* TeamMemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0208F7C71E6F2CF9009FB2A4 /* TeamMemberTableViewCell.swift */; };
+		0208F7CE1E6F3DE2009FB2A4 /* TeamMemberTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0208F7CD1E6F3DE2009FB2A4 /* TeamMemberTableViewController.swift */; };
+		0208F7D01E6F4101009FB2A4 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0208F7CF1E6F4101009FB2A4 /* Member.swift */; };
 		2B19DA51EFD5A22B4DF25CBF /* Pods_FitSquad.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70994FE58AE7F7D3B966D4FB /* Pods_FitSquad.framework */; };
 		CCB094681E48109F002A099D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CCB094671E48109E002A099D /* GoogleService-Info.plist */; };
 		CCB094691E48109F002A099D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CCB094671E48109E002A099D /* GoogleService-Info.plist */; };
@@ -43,6 +46,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0208F7C71E6F2CF9009FB2A4 /* TeamMemberTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamMemberTableViewCell.swift; sourceTree = "<group>"; };
+		0208F7CD1E6F3DE2009FB2A4 /* TeamMemberTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamMemberTableViewController.swift; sourceTree = "<group>"; };
+		0208F7CF1E6F4101009FB2A4 /* Member.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 		2491068E45530A99A38A1DD7 /* Pods-FitSquad.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitSquad.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FitSquad/Pods-FitSquad.debug.xcconfig"; sourceTree = "<group>"; };
 		4F20CECD9EA5C1C4F32EEEED /* Pods_FitSquadUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FitSquadUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6835865E4B34329A35820075 /* Pods-FitSquadUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitSquadUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FitSquadUITests/Pods-FitSquadUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -144,6 +150,9 @@
 				CD3220481E354C1800CFB952 /* AppDelegate.swift */,
 				CD1079FA1E6CFBFC000A0394 /* LoginViewController.swift */,
 				CD32204A1E354C1800CFB952 /* HomeViewController.swift */,
+				0208F7CF1E6F4101009FB2A4 /* Member.swift */,
+				0208F7C71E6F2CF9009FB2A4 /* TeamMemberTableViewCell.swift */,
+				0208F7CD1E6F3DE2009FB2A4 /* TeamMemberTableViewController.swift */,
 				CD57116F1E6B6318000DE7F1 /* CameraViewController.swift */,
 				CD5711711E6B6333000DE7F1 /* ProfileViewController.swift */,
 				CD32204C1E354C1800CFB952 /* Main.storyboard */,
@@ -474,8 +483,11 @@
 				CD32204B1E354C1800CFB952 /* HomeViewController.swift in Sources */,
 				CD3220491E354C1800CFB952 /* AppDelegate.swift in Sources */,
 				CD5711721E6B6333000DE7F1 /* ProfileViewController.swift in Sources */,
+				0208F7CE1E6F3DE2009FB2A4 /* TeamMemberTableViewController.swift in Sources */,
 				CD1079FB1E6CFBFC000A0394 /* LoginViewController.swift in Sources */,
+				0208F7C81E6F2CF9009FB2A4 /* TeamMemberTableViewCell.swift in Sources */,
 				CD5711701E6B6318000DE7F1 /* CameraViewController.swift in Sources */,
+				0208F7D01E6F4101009FB2A4 /* Member.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
