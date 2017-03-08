@@ -15,7 +15,7 @@ import FacebookLogin
 
 class PickTeamTableViewController: UITableViewController {
 
-    // Value: user id, name, pictureURL
+    // Value: [user id, name, pictureURL]
     var friends = [[String]]()
     let firebase = FIRDatabase.database().reference()
     var teamUids = [String]()
@@ -25,13 +25,49 @@ class PickTeamTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Select Teammates"
+        self.title = teamName
+        
+        let rightButtonItem = UIBarButtonItem.init(
+            title: "Done",
+            style: .done,
+            target: self,
+            action:#selector(rightButtonAction)
+        )
+        self.navigationItem.rightBarButtonItem = rightButtonItem
+        
         self.getUserFriends()
         self.tableView.delegate = self
+        
+        // add yourself to your team
+        let graphRequest:FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id"])
+        
+        graphRequest.start(completionHandler: { (connection, result, error) -> Void in
+            if ((error) != nil) {
+                // Process error
+                print("Error: \(error)")
+            } else {
+                // You successfully got the email of yourself, print it
+                let response = result as AnyObject?
+                let id = response?.object(forKey: "id") as AnyObject?
+                if let unwrapped = id {
+                    let userId = unwrapped as! String
+                    self.teamUids.append(userId)
+                }
+            }
+        })
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    func rightButtonAction(sender: UIBarButtonItem) {
+        // write to firebase
+        let team: NSDictionary = ["name": teamName, "users": teamUids]
+        self.firebase.ref.child("teams").childByAutoId().setValue(team)
+        
+        let viewController = self.storyboard!.instantiateViewController(withIdentifier: "mainTabBar") as UIViewController
+        self.present(viewController, animated: true, completion: nil)
     }
     
     // MARK: UITableViewDelegate
@@ -39,17 +75,17 @@ class PickTeamTableViewController: UITableViewController {
         print("You tapped cell number \(indexPath.row).")
         
         let tappedCell = self.tableView.cellForRow(at: indexPath)
-        tappedCell?.setHighlighted(true, animated: false)
-        
-        // TODO: make UI button
-        
-        // write to firebase
-        let team: NSDictionary = ["name": "Hard-coded-for-now", "users": teamUids]
-        self.firebase.ref.child("teams").childByAutoId().setValue(team)
+
+        if (teamUids.contains(friends[indexPath.row][0])) {
+            tableView.deselectRow(at: indexPath, animated: true)
+            teamUids = teamUids.filter { $0 != friends[indexPath.row][0] }
+        } else {
+            tappedCell?.setHighlighted(true, animated: false)
+            teamUids.append(friends[indexPath.row][0])
+        }
     }
     
     // MARK: - Table view data source
-    
     // TODO: make this not hard coded...
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
