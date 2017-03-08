@@ -2,6 +2,7 @@
 .DS_Store
 build/
 *.pbxuser
+# *.pbxproj
 !default.pbxuser
 *.mode1v3
 !default.mode1v3
@@ -9,7 +10,7 @@ build/
 !default.mode2v3
 *.perspectivev3
 !default.perspectivev3
-*.xcworkspace
+# *.xcworkspace
 !default.xcworkspace
 xcuserdata
 profile
@@ -17,4 +18,5 @@ profile
 DerivedData
 .idea/
 # Pods - if we want to use CocoaPods
-Pods
+# FitSquad/Pods/
+FitSquad/Assets.xcassets/AppIcon.appiconset/Contents.json
