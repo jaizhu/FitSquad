@@ -10,7 +10,8 @@ import UIKit
 
 class TeamMemberTableViewController: UITableViewController {
     
-    var members = [Member]()
+    var teams = ["Dogdogdog", "Catcatcat"]
+    var users = [[Member]]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,14 +27,21 @@ class TeamMemberTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // TODO: Make this 2 (to display one section for each team)
-        return 1
+        return teams.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return members.count
+        return users[section].count
     }
 
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section < teams.count {
+            return teams[section]
+        }
+        
+        return nil
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cellIdentifier = "TeamMemberTableViewCell"
@@ -42,14 +50,10 @@ class TeamMemberTableViewController: UITableViewController {
             fatalError("The dequeued cell is not an instance of TeamMemberTableViewCell.")
         }
 
-        let member = members[indexPath.row]
+        let member = users[indexPath.section][indexPath.row]
         
         cell.nameLabel.text = member.name
-//        cell.gymPhotoImageView.image = member.photo
-//
-//        cell.checkmarkImageView.image = UIImage(named: "Xmark")
-        
-        // TODO: Set checkmark if member has already participated
+
         if member.participated {
             cell.checkmarkImageView.image = UIImage(named: "Checkmark")
             cell.gymPhotoImageView.image = member.photo
@@ -123,6 +127,10 @@ class TeamMemberTableViewController: UITableViewController {
             fatalError("Unable to instantiate Jaimie")
         }
         
-        members += [rachel, danielle, jaimie]
+        users += [[rachel, danielle, jaimie]]
+        
+        // Pretend this is another team
+        users += [[rachel, danielle, jaimie]]
+        
     }
 }
