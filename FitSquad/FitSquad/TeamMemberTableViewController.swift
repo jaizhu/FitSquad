@@ -10,12 +10,13 @@ import UIKit
 
 class TeamMemberTableViewController: UITableViewController {
     
-    var teams = ["Dogdogdog", "Catcatcat"]
+    var teams = [String]()
     var users = [[Member]]()
 
+    @IBOutlet weak var competitionTitle: UINavigationItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         loadSampleTeam()
     }
 
@@ -114,6 +115,10 @@ class TeamMemberTableViewController: UITableViewController {
     // MARK: Private methods
     
     private func loadSampleTeam() {
+        
+        // TODO: Get member info from firebase
+        print(teams)
+        self.title = teams[0] + " vs. " + teams[1]
         
         guard let rachel = Member(name: "Rachel", photo: UIImage(named: "RachelGym"), participated: true) else {
             fatalError("Unable to instantiate Rachel")

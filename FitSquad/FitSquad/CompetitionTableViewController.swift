@@ -8,13 +8,19 @@
 
 import UIKit
 
-class CompetitionTableViewController: UITableViewController {
+import FBSDKLoginKit
+import FacebookCore
+import FacebookLogin
+import Firebase
 
-    let teamName = "Dogdogdog"
-    var competitions = ["Catcatcat", "TEAM"]
+class CompetitionTableViewController: UITableViewController {
+    let firebase = FIRDatabase.database().reference()
+    
+    var competitions = [["Dogdogdog", "Catcatcat"], ["Dogdogdog", "dummy team"]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadCompetitions()
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -43,8 +49,7 @@ class CompetitionTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CompetitionCell", for: indexPath)
         
-        cell.textLabel?.text = teamName + " vs. " + competitions[indexPath.row]
-        
+        cell.textLabel?.text = competitions[indexPath.row][0] + " vs. " + competitions[indexPath.row][1]
         return cell
     }
 
@@ -83,14 +88,57 @@ class CompetitionTableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
+     
 
+    let competitionSegueIdentifier = "CompetitionSegue"
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        if  segue.identifier == competitionSegueIdentifier,
+            let destination = segue.destination as? TeamMemberTableViewController,
+            let competitionIndex = tableView.indexPathForSelectedRow?.row
+        {
+            destination.teams = competitions[competitionIndex]
+        }
     }
-    */
+    
+    private func loadCompetitions() {
+        
+        var userId = String()
+        
+        let graphRequest:FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "email"])
+        
+        graphRequest.start(completionHandler: { (connection, result, error) -> Void in
+            if ((error) != nil) {
+                // Process error
+                print("Error: \(error)")
+            } else {
+                // You successfully got the email of yourself, print it
+                let response = result as AnyObject?
+                let email = response?.object(forKey: "id") as AnyObject?
+                if let unwrapped = email {
+                    userId = unwrapped as! String
+                }
+            }
+            
+            // TODO: Get competitions from Firebase based on user email
+            print("LOGIN INFO: ")
+            print(userId)
+//            self.title = userEmail + "\'s Competitions" // TODO: Deleteme
+            
+            self.firebase.ref.child("users")
+                .queryEqual(toValue: userId)
+                .observe(.value, with: { snapshot in
+                    let dict = snapshot.value as? [String:AnyObject]
+                    print(dict![0])
+                })
+            
+        })
+        
+    }
 
 }
