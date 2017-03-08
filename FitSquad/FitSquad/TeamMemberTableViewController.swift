@@ -10,12 +10,15 @@ import UIKit
 
 class TeamMemberTableViewController: UITableViewController {
     
-    var teams = ["Dogdogdog", "Catcatcat"]
+    var teams = [String]()
     var users = [[Member]]()
 
+    @IBOutlet weak var competitionTitle: UINavigationItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.title = teams[0] + " vs. " + teams[1]
         loadSampleTeam()
     }
 

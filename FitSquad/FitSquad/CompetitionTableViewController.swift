@@ -10,8 +10,7 @@ import UIKit
 
 class CompetitionTableViewController: UITableViewController {
 
-    let teamName = "Dogdogdog"
-    var competitions = ["Catcatcat", "TEAM"]
+    var competitions = [["Dogdogdog", "Catcatcat"], ["Dogdogdog", "dummy team"]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,8 +42,7 @@ class CompetitionTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CompetitionCell", for: indexPath)
         
-        cell.textLabel?.text = teamName + " vs. " + competitions[indexPath.row]
-        
+        cell.textLabel?.text = competitions[indexPath.row][0] + " vs. " + competitions[indexPath.row][1]
         return cell
     }
 
@@ -83,14 +81,22 @@ class CompetitionTableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
+     
 
+    let competitionSegueIdentifier = "CompetitionSegue"
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        if  segue.identifier == competitionSegueIdentifier,
+            let destination = segue.destination as? TeamMemberTableViewController,
+            let competitionIndex = tableView.indexPathForSelectedRow?.row
+        {
+            destination.teams = competitions[competitionIndex]
+        }
     }
-    */
 
 }

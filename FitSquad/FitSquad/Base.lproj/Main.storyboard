@@ -35,7 +35,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="cZY-UC-8Jd" kind="show" id="9hn-yV-oqs"/>
+                                    <segue destination="cZY-UC-8Jd" kind="show" identifier="CompetitionSegue" id="9hn-yV-oqs"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -46,7 +46,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Current Competitions" id="Q1J-Ii-qAx">
                         <barButtonItem key="backBarButtonItem" title="Back" id="JaY-oF-ajF"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="ET5-RN-J8T">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="add" id="ET5-RN-J8T">
                             <connections>
                                 <segue destination="ofZ-b4-kcK" kind="show" id="6Tc-8U-3y6"/>
                             </connections>
@@ -73,7 +73,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UMT-fJ-xre" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1736" y="-978"/>
+            <point key="canvasLocation" x="1740" y="-1020"/>
         </scene>
         <!--Team vs. Team-->
         <scene sceneID="3gi-Ow-W0c">
@@ -121,10 +121,13 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Team vs. Team" id="ch1-Rl-gbj"/>
+                    <connections>
+                        <outlet property="competitionTitle" destination="ch1-Rl-gbj" id="6CO-sS-WIx"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KIs-YJ-BTw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1740" y="-296"/>
+            <point key="canvasLocation" x="1740" y="-271"/>
         </scene>
         <!--Profile-->
         <scene sceneID="gXP-vx-5af">
