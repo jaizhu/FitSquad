@@ -145,12 +145,10 @@ class TeamMemberTableViewController: UITableViewController {
         .observe(.value, with: {(snapshot : FIRDataSnapshot) in
                 if let dict = snapshot.value as? NSDictionary {
                     let teamData = dict.allValues.first! as? NSDictionary
-                    // print(teamData)
                     t1UserIds = (teamData!["users"]! as! NSArray).flatMap({ $0 as? String})
                     
                     var name : String?
                     name = nil
-                    
                     var photoBase64 : String?
                     photoBase64 = nil
                     
@@ -160,9 +158,6 @@ class TeamMemberTableViewController: UITableViewController {
                                 let dict = snapshot.value as! NSDictionary
                                 name = dict["name"]! as! String
                                 
-                                dump(self.firebase.ref.child("photos")
-                                    .queryOrdered(byChild: "user")
-                                    .queryEqual(toValue: userId))
                                 self.firebase.ref.child("photos")
                                     .queryOrdered(byChild: "user")
                                     .queryEqual(toValue: userId)
@@ -173,7 +168,7 @@ class TeamMemberTableViewController: UITableViewController {
                                             }
                                             self.t1Users.append(newUser)
                                         } else {
-                                            let dict = snapshot.value as! NSDictionary
+                                            if let dict = snapshot.value as? NSDictionary {
                                             photoBase64 = nil
                                             for pic in dict.allValues {
                                                 var picData = pic as! NSDictionary
@@ -194,8 +189,10 @@ class TeamMemberTableViewController: UITableViewController {
                                                 guard let newUser = Member(name: name!, photo: decodedImage, participated: true) else {
                                                     fatalError("Unable to instantiate user") }
                                                 self.t1Users.append(newUser)
+                                                }
                                             }
                                         }
+                                        
                                 dump(self.t1Users)
                                 self.tableView.reloadData()
                             })
