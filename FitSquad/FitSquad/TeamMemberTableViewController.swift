@@ -162,7 +162,7 @@ class TeamMemberTableViewController: UITableViewController {
                                     .queryOrdered(byChild: "user")
                                     .queryEqual(toValue: userId)
                                     .observe(.value, with: { snapshot in
-                                        if snapshot.value == nil {  // User has no photos
+                                        if snapshot.value is NSNull {  // User has no photos
                                             guard let newUser = Member(name: name!, photo: UIImage(named: "DefaultPhoto"), participated: false)  else {
                                                 fatalError("Unable to instantiate user")
                                             }
@@ -193,8 +193,9 @@ class TeamMemberTableViewController: UITableViewController {
                                             }
                                         }
                                         
-                                dump(self.t1Users)
-                                self.tableView.reloadData()
+                                        if(self.t1Users.count == 3) {
+                                            self.tableView.reloadData()
+                                        }
                             })
                         })
                     }
@@ -208,7 +209,7 @@ class TeamMemberTableViewController: UITableViewController {
         
         firebase.ref.child("teams")
             .queryOrdered(byChild: "name")
-            .queryEqual(toValue: teams[1])
+            .queryEqual(toValue: teams[0])
             .observe(.value, with: {(snapshot : FIRDataSnapshot) in
                 if let dict = snapshot.value as? NSDictionary {
                     let teamData = dict.allValues.first! as? NSDictionary
@@ -216,35 +217,31 @@ class TeamMemberTableViewController: UITableViewController {
                     
                     var name : String?
                     name = nil
-                    
                     var photoBase64 : String?
                     photoBase64 = nil
                     
-                    for userId in t2UserIds {
+                    for userId in t1UserIds {
                         self.firebase.ref.child("users").child(userId)
                             .observe(.value, with: { (snapshot : FIRDataSnapshot) in
-                                if let dict = snapshot.value as? NSDictionary {
-                                    name = dict["name"]! as! String
-                                }
-                                
+                                let dict = snapshot.value as! NSDictionary
+                                name = dict["name"]! as! String
                                 
                                 self.firebase.ref.child("photos")
                                     .queryOrdered(byChild: "user")
                                     .queryEqual(toValue: userId)
                                     .observe(.value, with: { snapshot in
-                                        if snapshot.value == nil {  // User has no photos
+                                        if snapshot.value is NSNull {  // User has no photos
                                             guard let newUser = Member(name: name!, photo: UIImage(named: "DefaultPhoto"), participated: false)  else {
                                                 fatalError("Unable to instantiate user")
                                             }
                                             self.t2Users.append(newUser)
                                         } else {
-                                            if let dict = snapshot.value as? NSDictionary {    // TODO: Sort photos by date
+                                            if let dict = snapshot.value as? NSDictionary {
                                                 photoBase64 = nil
                                                 for pic in dict.allValues {
                                                     var picData = pic as! NSDictionary
                                                     if (picData["date"] as! String) == dateString { // User has photo from today
                                                         photoBase64 = picData["photoBase64"] as! String
-                                                        break;
                                                     }
                                                 }
                                                 
@@ -258,12 +255,13 @@ class TeamMemberTableViewController: UITableViewController {
                                                     let decodedImage:UIImage = UIImage(data: dataDecoded as Data)!
                                                     
                                                     guard let newUser = Member(name: name!, photo: decodedImage, participated: true) else {
-                                                        fatalError("Unable to instantiate user")
-                                                    }
+                                                        fatalError("Unable to instantiate user") }
                                                     self.t2Users.append(newUser)
                                                 }
                                             }
-                                            dump(self.t2Users)
+                                        }
+                                        
+                                        if(self.t2Users.count == 3) {
                                             self.tableView.reloadData()
                                         }
                                     })
@@ -272,6 +270,5 @@ class TeamMemberTableViewController: UITableViewController {
                 }
                 
             })
-
     }
 }

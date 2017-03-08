@@ -66,6 +66,9 @@ class PickTeamTableViewController: UITableViewController {
         let team: NSDictionary = ["name": teamName, "users": teamUids]
         self.firebase.ref.child("teams").childByAutoId().setValue(team)
         
+        let comp : NSDictionary = ["points1": 0, "points2": 0, "team1": teamName, "team2": "Dog Squad"]
+        self.firebase.ref.child("competitions").childByAutoId().setValue(comp)
+        
         let viewController = self.storyboard!.instantiateViewController(withIdentifier: "mainTabBar") as UIViewController
         self.present(viewController, animated: true, completion: nil)
     }
