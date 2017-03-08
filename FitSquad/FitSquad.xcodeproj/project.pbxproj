@@ -25,7 +25,8 @@
 		CD3220691E354C1800CFB952 /* FitSquadUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3220681E354C1800CFB952 /* FitSquadUITests.swift */; };
 		CD5711701E6B6318000DE7F1 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD57116F1E6B6318000DE7F1 /* CameraViewController.swift */; };
 		CD5711721E6B6333000DE7F1 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5711711E6B6333000DE7F1 /* ProfileViewController.swift */; };
-		CD74D8CD1E6FAA7E000E448F /* PickTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD74D8CC1E6FAA7D000E448F /* PickTeamViewController.swift */; };
+		CD74D8CD1E6FAA7E000E448F /* PickTeamTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD74D8CC1E6FAA7D000E448F /* PickTeamTableViewController.swift */; };
+		CD74D8CF1E70095F000E448F /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD74D8CE1E70095F000E448F /* FriendTableViewCell.swift */; };
 		DB274E0EAECA6EC64D680C52 /* Pods_FitSquadUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F20CECD9EA5C1C4F32EEEED /* Pods_FitSquadUITests.framework */; };
 		EB81DC7DA64CBF52C26F8184 /* Pods_FitSquadTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E93F56545F5213F618FA7E /* Pods_FitSquadTests.framework */; };
 /* End PBXBuildFile section */
@@ -81,7 +82,8 @@
 		CD57117F1E6B6CCA000DE7F1 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../../../../../Downloads/FacebookSDKs-iOS-4.20.0/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
 		CD5711801E6B6CCA000DE7F1 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "../../../../../Downloads/FacebookSDKs-iOS-4.20.0/FBSDKShareKit.framework"; sourceTree = "<group>"; };
 		CD74D8CB1E6F38E9000E448F /* FitSquad.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FitSquad.entitlements; sourceTree = "<group>"; };
-		CD74D8CC1E6FAA7D000E448F /* PickTeamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickTeamViewController.swift; sourceTree = "<group>"; };
+		CD74D8CC1E6FAA7D000E448F /* PickTeamTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickTeamTableViewController.swift; sourceTree = "<group>"; };
+		CD74D8CE1E70095F000E448F /* FriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
 		E2E93F56545F5213F618FA7E /* Pods_FitSquadTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FitSquadTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB2EE4A283D551CBCB021844 /* Pods-FitSquad.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitSquad.release.xcconfig"; path = "Pods/Target Support Files/Pods-FitSquad/Pods-FitSquad.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -162,7 +164,8 @@
 				0208F7CD1E6F3DE2009FB2A4 /* TeamMemberTableViewController.swift */,
 				CD57116F1E6B6318000DE7F1 /* CameraViewController.swift */,
 				CD5711711E6B6333000DE7F1 /* ProfileViewController.swift */,
-				CD74D8CC1E6FAA7D000E448F /* PickTeamViewController.swift */,
+				CD74D8CC1E6FAA7D000E448F /* PickTeamTableViewController.swift */,
+				CD74D8CE1E70095F000E448F /* FriendTableViewCell.swift */,
 				CD32204C1E354C1800CFB952 /* Main.storyboard */,
 				CD32204F1E354C1800CFB952 /* Assets.xcassets */,
 				CD3220511E354C1800CFB952 /* LaunchScreen.storyboard */,
@@ -281,7 +284,7 @@
 				TargetAttributes = {
 					CD3220441E354C1800CFB952 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 3MVK6497FQ;
+						DevelopmentTeam = K5V84SLLJ7;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -494,10 +497,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD74D8CD1E6FAA7E000E448F /* PickTeamViewController.swift in Sources */,
+				CD74D8CD1E6FAA7E000E448F /* PickTeamTableViewController.swift in Sources */,
 				CD32204B1E354C1800CFB952 /* HomeViewController.swift in Sources */,
 				CD3220491E354C1800CFB952 /* AppDelegate.swift in Sources */,
 				CD5711721E6B6333000DE7F1 /* ProfileViewController.swift in Sources */,
+				CD74D8CF1E70095F000E448F /* FriendTableViewCell.swift in Sources */,
 				0208F7CE1E6F3DE2009FB2A4 /* TeamMemberTableViewController.swift in Sources */,
 				CD1079FB1E6CFBFC000A0394 /* LoginViewController.swift in Sources */,
 				0208F7D21E6F8C77009FB2A4 /* CompetitionTableViewController.swift in Sources */,
@@ -657,7 +661,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = FitSquad/FitSquad.entitlements;
-				DEVELOPMENT_TEAM = 3MVK6497FQ;
+				DEVELOPMENT_TEAM = K5V84SLLJ7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -665,7 +669,7 @@
 				INFOPLIST_FILE = FitSquad/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = FitSquadFit.dogdogdog;
+				PRODUCT_BUNDLE_IDENTIFIER = FitSquad.dogdogdog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -677,7 +681,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = FitSquad/FitSquad.entitlements;
-				DEVELOPMENT_TEAM = 3MVK6497FQ;
+				DEVELOPMENT_TEAM = K5V84SLLJ7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -685,7 +689,7 @@
 				INFOPLIST_FILE = FitSquad/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = FitSquadFit.dogdogdog;
+				PRODUCT_BUNDLE_IDENTIFIER = FitSquad.dogdogdog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
