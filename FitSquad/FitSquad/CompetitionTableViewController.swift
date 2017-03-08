@@ -8,12 +8,17 @@
 
 import UIKit
 
+import FBSDKLoginKit
+import FacebookCore
+import FacebookLogin
+
 class CompetitionTableViewController: UITableViewController {
 
     var competitions = [["Dogdogdog", "Catcatcat"], ["Dogdogdog", "dummy team"]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadCompetitions()
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -97,6 +102,34 @@ class CompetitionTableViewController: UITableViewController {
         {
             destination.teams = competitions[competitionIndex]
         }
+    }
+    
+    private func loadCompetitions() {
+        
+        var userEmail = String()
+        
+        let graphRequest:FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "email"])
+        
+        graphRequest.start(completionHandler: { (connection, result, error) -> Void in
+            if ((error) != nil) {
+                // Process error
+                print("Error: \(error)")
+            } else {
+                // You successfully got the email of yourself, print it
+                let response = result as AnyObject?
+                let email = response?.object(forKey: "email") as AnyObject?
+                if let unwrapped = email {
+                    userEmail = unwrapped as! String
+                }
+            }
+            
+            // TODO: Get competitions from Firebase based on user email
+            print("LOGIN INFO: ")
+            print(userEmail)
+            self.title = userEmail + "\'s Competitions" // TODO: Deleteme
+            
+        })
+        
     }
 
 }
