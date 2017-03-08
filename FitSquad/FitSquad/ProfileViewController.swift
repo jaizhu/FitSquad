@@ -14,16 +14,24 @@ import FacebookCore
 
 class ProfileViewController: UIViewController {
     
+    @IBOutlet weak var fakeprofile: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
-        
-        let button:UIButton = UIButton(frame: CGRect(x: 100, y: 400, width: 100, height: 50))
+        // this button doesn't display
+        let button: UIButton = UIButton()
         button.backgroundColor = .black
         button.setTitle("Logout", for: .normal)
         button.addTarget(self, action:#selector(self.fbLogoutButtonClicked), for: .touchUpInside)
         self.view.addSubview(button)
+        
+        let imageName = "jabrill.png"
+        let image = UIImage(named: imageName)
+        let imageView = UIImageView(image: image!)
+        
+        imageView.frame = CGRect(x: 0, y: 0, width: 100, height: 200)
+        fakeprofile.image = image
     }
     
     override func didReceiveMemoryWarning() {

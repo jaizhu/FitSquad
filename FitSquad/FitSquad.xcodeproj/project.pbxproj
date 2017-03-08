@@ -24,6 +24,8 @@
 		CD3220531E354C1800CFB952 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD3220511E354C1800CFB952 /* LaunchScreen.storyboard */; };
 		CD32205E1E354C1800CFB952 /* FitSquadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD32205D1E354C1800CFB952 /* FitSquadTests.swift */; };
 		CD3220691E354C1800CFB952 /* FitSquadUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3220681E354C1800CFB952 /* FitSquadUITests.swift */; };
+		CD48D54A1E706D9000397569 /* jabrill.png in Resources */ = {isa = PBXBuildFile; fileRef = CD48D5491E706D9000397569 /* jabrill.png */; };
+		CD48D54C1E7070BD00397569 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD48D54B1E7070BD00397569 /* MainTabBarViewController.swift */; };
 		CD5711701E6B6318000DE7F1 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD57116F1E6B6318000DE7F1 /* CameraViewController.swift */; };
 		CD5711721E6B6333000DE7F1 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5711711E6B6333000DE7F1 /* ProfileViewController.swift */; };
 		CD74D8CD1E6FAA7E000E448F /* PickTeamTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD74D8CC1E6FAA7D000E448F /* PickTeamTableViewController.swift */; };
@@ -77,6 +79,8 @@
 		CD3220641E354C1800CFB952 /* FitSquadUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FitSquadUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD3220681E354C1800CFB952 /* FitSquadUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitSquadUITests.swift; sourceTree = "<group>"; };
 		CD32206A1E354C1800CFB952 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CD48D5491E706D9000397569 /* jabrill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jabrill.png; sourceTree = "<group>"; };
+		CD48D54B1E7070BD00397569 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		CD57116F1E6B6318000DE7F1 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		CD5711711E6B6333000DE7F1 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CD57117D1E6B6CCA000DE7F1 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "../../../../../Downloads/FacebookSDKs-iOS-4.20.0/Bolts.framework"; sourceTree = "<group>"; };
@@ -159,6 +163,7 @@
 				CD74D8CB1E6F38E9000E448F /* FitSquad.entitlements */,
 				CD3220481E354C1800CFB952 /* AppDelegate.swift */,
 				CD1079FA1E6CFBFC000A0394 /* LoginViewController.swift */,
+				CD48D54B1E7070BD00397569 /* MainTabBarViewController.swift */,
 				CD32204A1E354C1800CFB952 /* HomeViewController.swift */,
 				0208F7D11E6F8C77009FB2A4 /* CompetitionTableViewController.swift */,
 				0208F7CF1E6F4101009FB2A4 /* Member.swift */,
@@ -174,6 +179,7 @@
 				CD3220511E354C1800CFB952 /* LaunchScreen.storyboard */,
 				CCB094671E48109E002A099D /* GoogleService-Info.plist */,
 				CD3220541E354C1800CFB952 /* Info.plist */,
+				CD48D5491E706D9000397569 /* jabrill.png */,
 			);
 			path = FitSquad;
 			sourceTree = "<group>";
@@ -287,7 +293,7 @@
 				TargetAttributes = {
 					CD3220441E354C1800CFB952 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 3MVK6497FQ;
+						DevelopmentTeam = K5V84SLLJ7;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -336,6 +342,7 @@
 				CCB094681E48109F002A099D /* GoogleService-Info.plist in Resources */,
 				CD3220501E354C1800CFB952 /* Assets.xcassets in Resources */,
 				CD32204E1E354C1800CFB952 /* Main.storyboard in Resources */,
+				CD48D54A1E706D9000397569 /* jabrill.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,6 +514,7 @@
 				CD74D8CF1E70095F000E448F /* FriendTableViewCell.swift in Sources */,
 				0208F7CE1E6F3DE2009FB2A4 /* TeamMemberTableViewController.swift in Sources */,
 				CD1079FB1E6CFBFC000A0394 /* LoginViewController.swift in Sources */,
+				CD48D54C1E7070BD00397569 /* MainTabBarViewController.swift in Sources */,
 				0208F7D21E6F8C77009FB2A4 /* CompetitionTableViewController.swift in Sources */,
 				0208F7C81E6F2CF9009FB2A4 /* TeamMemberTableViewCell.swift in Sources */,
 				CD5711701E6B6318000DE7F1 /* CameraViewController.swift in Sources */,
@@ -666,7 +674,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = FitSquad/FitSquad.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 3MVK6497FQ;
+				DEVELOPMENT_TEAM = K5V84SLLJ7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -674,7 +682,7 @@
 				INFOPLIST_FILE = FitSquad/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = FitSquadFit.dogdogdog;
+				PRODUCT_BUNDLE_IDENTIFIER = FitSquad.dogdogdog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -688,7 +696,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = FitSquad/FitSquad.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 3MVK6497FQ;
+				DEVELOPMENT_TEAM = K5V84SLLJ7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -696,7 +704,7 @@
 				INFOPLIST_FILE = FitSquad/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = FitSquadFit.dogdogdog;
+				PRODUCT_BUNDLE_IDENTIFIER = FitSquad.dogdogdog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
