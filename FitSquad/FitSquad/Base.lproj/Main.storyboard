@@ -35,7 +35,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hi5-kM-vXa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-151" y="43"/>
+            <point key="canvasLocation" x="-151" y="21"/>
         </scene>
         <!--Camera-->
         <scene sceneID="A1I-OK-qB0">
@@ -53,10 +53,26 @@
                                 <rect key="frame" x="43" y="28" width="283" height="506"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tZu-sN-ayS">
-                                <rect key="frame" x="149" y="562" width="77" height="33"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vHT-G4-SnS">
+                                <rect key="frame" x="43" y="559" width="78" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Take Photo"/>
+                                <state key="normal" title="Save Photo"/>
+                                <connections>
+                                    <action selector="save:" destination="LZT-I8-wt3" eventType="touchUpInside" id="Rgk-wZ-Ybw"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGr-RS-8Rk">
+                                <rect key="frame" x="138" y="559" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="test:" destination="LZT-I8-wt3" eventType="touchUpInside" id="nUj-us-iDr"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tZu-sN-ayS">
+                                <rect key="frame" x="210" y="556" width="140" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Take  Another Photo"/>
                                 <connections>
                                     <action selector="takePhoto:" destination="LZT-I8-wt3" eventType="touchUpInside" id="qee-ma-TjR"/>
                                 </connections>
@@ -121,11 +137,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9QQ-Y6-TqY">
-                                <rect key="frame" x="72" y="570" width="230" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -135,12 +146,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Wx-6D-fVQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2042.4000000000001" y="-50.824587706146929"/>
+            <point key="canvasLocation" x="-2116" y="-71"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="vPJ-IK-kGq">
             <objects>
-                <tabBarController id="QY8-NM-jwc" sceneMemberID="viewController">
+                <tabBarController id="QY8-NM-jwc" customClass="TabBarController" customModule="FitSquad" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="yaf-gQ-Gj7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -154,7 +165,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XPS-6z-ErG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1103" y="-70"/>
+            <point key="canvasLocation" x="-1135" y="-71"/>
         </scene>
     </scenes>
 </document>

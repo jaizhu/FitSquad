@@ -35,6 +35,6 @@
 	<key>GOOGLE_APP_ID</key>
 	<string>1:339097831337:ios:391d4d92d4affbf6</string>
 	<key>DATABASE_URL</key>
-	<string>https://fit-squad.firebaseio.com</string>
+	<string>https://fitsquad-33a4b.firebaseio.com/</string>
 </dict>
 </plist>

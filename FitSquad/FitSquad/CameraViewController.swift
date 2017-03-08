@@ -6,16 +6,16 @@
 //  Copyright © 2017 dogdogdog. All rights reserved.
 //
 
-import Foundation
 import UIKit
+import Foundation
 import FirebaseDatabase
 import AVFoundation
 
 class CameraViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     @IBOutlet weak var imageView: UIImageView!
-    
     var imagePicker: UIImagePickerController!
+    let firebase = FIRDatabase.database().reference()
     
     @IBAction func takePhoto(_ sender: Any) {
         askPermission()
@@ -34,13 +34,17 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         if let image = info[UIImagePickerControllerOriginalImage] {
             imagePicker.dismiss(animated: true, completion: nil)
             imageView.image = image as? UIImage
-            
-            let firebase = FIRDatabase.database().reference()
+        }
+
+    }
+    
+    @IBAction func save(_ sender: Any) {
+        if let image = imageView.image {
             let user = "testUser1"   // TODO: Get User
             var data: NSData = NSData()
             
             // Save photo to Firebase
-            data = UIImageJPEGRepresentation(image as! UIImage, 0.1)! as NSData
+            data = UIImageJPEGRepresentation(image, 0.1)! as NSData
             
             let base64String = data.base64EncodedString()
             
@@ -57,7 +61,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         }
 
     }
-    
+  
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         
     }
@@ -110,6 +114,59 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
             });
         }
     }
+    
+    @IBAction func test(_ sender: Any) {
+        getCompetitionPhotos(teamName: "team 1")
+    }
+    
+    
+    func getCompetitionPhotos(teamName : String) -> [String : String] {   // team name and get back Name & Photo for
+        
+        // Get team members
+        var users = [String]()
+        firebase.ref.child("teams")
+            .queryOrdered(byChild: "name")
+            .queryEqual(toValue: teamName)
+            .observe(.value, with: { snapshot in
+                let dict = snapshot.value as? [String:AnyObject]
+                print(dict![0])
+        })
+        
+        var photos = [String : String]()
+        var name : String?
+        name = nil
+        var photoBase64 : String?
+        photoBase64 = nil
+        
+        for user in users {
+            firebase.ref.child("users")
+                .queryOrderedByKey()
+                .queryEqual(toValue: user)
+                .observe(.value, with: { snapshot in
+                    if let snapshotValue = snapshot.value as? [String:Any] {
+                        name = snapshotValue["name"] as! String
+                    }
+                })
+            
+            firebase.ref.child("photos")
+                .queryOrdered(byChild: user)
+                .queryEqual(toValue: user)
+                .observe(.value, with: { snapshot in
+                    if let snapshotValue = snapshot.value as? [String:Any] {
+                        photoBase64 = snapshotValue["photoBase64"] as! String
+                    }
+                })
+            photos[name!] = photoBase64!
+        }
+        
+        return photos
+    }
+    
+//    func getUserPhotos(){
+//        firebase.ref.child("photos").queryOrdered(byChild:)
+//        
+//        
+//    }
 
 }
 
