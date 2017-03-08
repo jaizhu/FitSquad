@@ -12,7 +12,11 @@ import FBSDKLoginKit
 import FacebookCore
 import FacebookLogin
 
+//class PickTeamViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 class PickTeamViewController: UIViewController {
+
+    
+    @IBOutlet weak var friendsListTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +25,8 @@ class PickTeamViewController: UIViewController {
         
         self.getUserFriends()
         
+//        friendsListTableView.delegate = self
+//        friendsListTableView.dataSource = self
     }
     
     override func didReceiveMemoryWarning() {
@@ -28,10 +34,14 @@ class PickTeamViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        // something
+//    }
+    
     func getUserFriends() {
         if ((FBSDKAccessToken.current()) != nil) {
             
-            let params = ["fields": "first_name, last_name, email"]
+            let params = ["fields": "first_name, last_name, email, picture"]
             let graphRequest:FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me/friends", parameters: params)
             
             graphRequest.start(completionHandler: { (connection, result, error) -> Void in

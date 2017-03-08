@@ -16,6 +16,7 @@ class LoginViewController: UIViewController {
     
     var dict : [String : AnyObject]!
     var fbLoginSuccess = false
+    var tryingToFuckingLogin = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,20 +29,21 @@ class LoginViewController: UIViewController {
         view.addSubview(loginButton)
         
         // Check if user is already logged in
-        if let accessToken = AccessToken.current {
+        if (AccessToken.current != nil) {
             print("-- User already logged in")
-            print(accessToken.userId ?? "NO ID")
-            fbLoginSuccess = true
+            self.fbLoginSuccess = true
         } else {
             print("-- User not logged in")
         }
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        if (FBSDKAccessToken.current() != nil && fbLoginSuccess == true) {
+        if (self.tryingToFuckingLogin == 1 || FBSDKAccessToken.current() != nil && self.fbLoginSuccess == true) {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: "mainTabBar") as UIViewController
             self.present(viewController, animated: true, completion: nil)
         }
+        
+        self.tryingToFuckingLogin += 1
     }
     
     override func didReceiveMemoryWarning() {
@@ -49,7 +51,9 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func FBLoginButtonPressed(_ sender: AnyObject) {
+    // actions and methods
+    
+    func initializeLoginManager() {
         let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
         fbLoginManager.logIn(withReadPermissions: ["email, user_friends, public_profile"], from: self) { (result, error) in
             if (error == nil) {
@@ -68,7 +72,7 @@ class LoginViewController: UIViewController {
     
     func getFBUserData() {
         if ((FBSDKAccessToken.current()) != nil) {
-            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"]).start(completionHandler: { (connection, result, error) -> Void in
+            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": ["id", "first_name", "last_name", "picture", "email"]]).start(completionHandler: { (connection, result, error) -> Void in
                 if (error == nil) {
                     self.dict = result as! [String: AnyObject]
                     print("========")
