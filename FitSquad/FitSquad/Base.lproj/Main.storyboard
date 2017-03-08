@@ -66,7 +66,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="98" id="adJ-xy-e9V" customClass="FriendTableViewCell" customModule="FitSquad" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FriendTableViewCell" rowHeight="98" id="adJ-xy-e9V" customClass="FriendTableViewCell" customModule="FitSquad" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="98"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="adJ-xy-e9V" id="XZL-Na-1AI">
@@ -78,7 +78,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ciV-99-IQL">
-                                            <rect key="frame" x="104" y="38" width="45" height="21"/>
+                                            <rect key="frame" x="104" y="38" width="229" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -100,7 +100,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YdM-MC-efh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1740" y="-1020"/>
+            <point key="canvasLocation" x="1740" y="-1020.5397301349326"/>
         </scene>
         <!--Team vs. Team-->
         <scene sceneID="3gi-Ow-W0c">
@@ -265,7 +265,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="DefaultImage" width="1512" height="1512"/>
+        <image name="DefaultImage" width="300" height="300"/>
         <image name="Xmark" width="348" height="297"/>
     </resources>
 </document>

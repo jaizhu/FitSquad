@@ -8,53 +8,89 @@
 
 import Foundation
 import UIKit
+import FirebaseDatabase
 import FBSDKLoginKit
 import FacebookCore
 import FacebookLogin
 
 class PickTeamTableViewController: UITableViewController {
 
-    // Keeps track of friends
-    // Key: User ids
-    // Value: name, pictureURL
-    var friends = [String: [String]]()
+    // Value: user id, name, pictureURL
+    var friends = [[String]]()
+    let firebase = FIRDatabase.database().reference()
+    var teamUids = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         self.title = "Select Teammates"
-        
-//        let dynamicTxtField: UITextField = UITextField()
-//        dynamicTxtField.backgroundColor = UIColor.lightGray
-//        self.view.addSubview(dynamicTxtField)
-        
         self.getUserFriends()
-        
-//        friendsListTableView.delegate = self
-//        friendsListTableView.dataSource = self
-    }
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return friends.count
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FriendCell", for: indexPath)
-        
-        cell.textLabel?.text = "Name yay"
-        
-        return cell
+        self.tableView.delegate = self
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: UITableViewDelegate
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("You tapped cell number \(indexPath.row).")
+        
+        let tappedCell = self.tableView.cellForRow(at: indexPath)
+        tappedCell?.setHighlighted(true, animated: false)
+        
+        // TODO: make UI button
+        
+        // write to firebase
+        let team: NSDictionary = ["name": "Hard-coded-for-now", "users": teamUids]
+        self.firebase.ref.child("teams").childByAutoId().setValue(team)
+    }
+    
+    // MARK: - Table view data source
+    
+    // TODO: make this not hard coded...
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cellIdentifier = "FriendTableViewCell"
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? FriendTableViewCell else {
+            fatalError("The dequeued cell is not an instance of TeamMemberTableViewCell.")
+        }
+        
+        if (friends.count > 0 && indexPath.row < friends.count) {
+            let friend = friends[indexPath.row]
+            
+            cell.nameLabel.text = friend[1]
+            cell.profileImageView.contentMode = .scaleAspectFit
+            let photoURL = URL(string: friend[2])
+            downloadImage(url: photoURL!, cell: cell)
+            
+            return cell
+        } else {
+            return cell
+        }
+    }
+    
+    func getDataFromUrl(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {
+        URLSession.shared.dataTask(with: url) {
+            (data, response, error) in
+            completion(data, response, error)
+            }.resume()
+    }
+    
+    func downloadImage(url: URL, cell: FriendTableViewCell) {
+        print("** Download Started")
+        getDataFromUrl(url: url) { (data, response, error)  in
+            guard let data = data, error == nil else { return }
+            print(response?.suggestedFilename ?? url.lastPathComponent)
+            print("** Download Finished")
+            DispatchQueue.main.async() { () -> Void in
+                cell.profileImageView.image = UIImage(data: data)
+            }
+        }
     }
     
     func getUserFriends() {
@@ -69,12 +105,6 @@ class PickTeamTableViewController: UITableViewController {
                     print("Error: \(error)")
                 } else {
                     print("==========")
-                    
-                    // info to be collected
-                    
-//                    let dict = convertToDictionary(text: str)
-                    
-                    
                     // get user name
                     // TODO: Add some sort of check that we can do this...
                     let recvd_data = result as! NSDictionary?
@@ -86,24 +116,28 @@ class PickTeamTableViewController: UITableViewController {
                     let myArrLength = myArr?.count ?? 0
                     
                     for i in 0..<myArrLength {
-//                        let name = myArr?[i]["name"]
-//                        let id = myArr?[i]["id"]
-//                        let picture = myArr?[i]["picture"]["picture"]
-//                        print(myArr?[i])
+                        let myDict = myArr?[i] as! NSDictionary?
+                        
+                        let name = myDict?["name"]
+                        let nameStr = name as? String
+                        let id = myDict?["id"]
+                        let idStr = id as? String
+                        
+                        let pictureAny = myDict?["picture"]
+                        let pictureDataDict = pictureAny as! NSDictionary?
+                        let pictureDict = pictureDataDict?["data"]
+                        let wtf = pictureDict as! NSDictionary?
+                        let RU4real = wtf?["url"]
+                        let finallyTheURL = RU4real as! NSString?
+                        let urlStr = finallyTheURL as! String
+                        
+                        self.friends.append([idStr!, nameStr!, urlStr])
                     }
-                    
-//                    let recvd_data_inner = recvd_data?["data"] as! NSArray?
-                    
-//                    print(recvd_data_inner?["data"] ?? "NO")
-                    
-
-                    
-                    
-                    print("hi")
-                    
-                    // get user id
-                    
-                    // get user profile photo
+                    print("@@@@@@@@@@@@@@@@@@")
+                    print(self.friends)
+                    print("@@@@@@@@@@@@@@@@@@")
+                    // async shit because of completion handler
+                    self.tableView.reloadData()
                 }
             })
         }
