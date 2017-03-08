@@ -11,7 +11,8 @@ import UIKit
 class TeamMemberTableViewController: UITableViewController {
     
     var teams = [String]()
-    var users = [[Member]]()
+    var team1 = [Member]()
+    var team2 = [Member]()
 
     @IBOutlet weak var competitionTitle: UINavigationItem!
     
@@ -32,7 +33,7 @@ class TeamMemberTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users[section].count
+        return team1.count
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -51,7 +52,15 @@ class TeamMemberTableViewController: UITableViewController {
             fatalError("The dequeued cell is not an instance of TeamMemberTableViewCell.")
         }
 
-        let member = users[indexPath.section][indexPath.row]
+        var member = team1[2]
+        print(indexPath.row)
+        if indexPath.section == 0 {
+            member = team1[indexPath.row]
+        }
+        else {
+            member = team2[indexPath.row]
+        }
+//        let member = users[indexPath.section][indexPath.row]
         
         cell.nameLabel.text = member.name
 
@@ -132,10 +141,23 @@ class TeamMemberTableViewController: UITableViewController {
             fatalError("Unable to instantiate Jaimie")
         }
         
-        users += [[rachel, danielle, jaimie]]
+        team1 += [rachel, danielle, jaimie]
+        
+        let filename = "cat.png"
+        guard let cat = Member(name: "Cat", photo: UIImage(named: filename), participated: true) else {
+            fatalError("Unable to instantiate Cat")
+        }
+        
+        // TODO: Helpful for displaying photos from firebase....?
+//        let url2 = NSURL(string: url)  //postPhoto URL
+//        let data = NSData(contentsOfURL: url2!) // this URL convert into Data
+//        if data != nil {  //Some time Data value will be nil so we need to validate such things
+//            myPost.postPhoto = UIImage(data: data!)
+//        }
+
         
         // Pretend this is another team
-        users += [[rachel, danielle, jaimie]]
+        team2 += [rachel, rachel, rachel]
         
     }
 }

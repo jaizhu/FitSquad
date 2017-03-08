@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16E175b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="n4T-1x-n83">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="n4T-1x-n83">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -48,7 +48,7 @@
                         <barButtonItem key="backBarButtonItem" title="Back" id="JaY-oF-ajF"/>
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="add" id="ET5-RN-J8T">
                             <connections>
-                                <segue destination="cAO-Zu-poD" kind="show" id="zLN-nE-ymr"/>
+                                <segue destination="Uca-2L-Fgm" kind="show" id="YfU-oy-Gyl"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -57,50 +57,43 @@
             </objects>
             <point key="canvasLocation" x="775.20000000000005" y="-638.2308845577212"/>
         </scene>
-        <!--Pick Team Table View Controller-->
-        <scene sceneID="xjd-TK-81k">
+        <!--Team Name View Controller-->
+        <scene sceneID="U6a-zY-DRs">
             <objects>
-                <tableViewController id="cAO-Zu-poD" customClass="PickTeamTableViewController" customModule="FitSquad" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="98" sectionHeaderHeight="28" sectionFooterHeight="28" id="WHw-zf-gLn">
+                <viewController id="Uca-2L-Fgm" customClass="TeamNameViewController" customModule="FitSquad" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Hyj-V4-MTi"/>
+                        <viewControllerLayoutGuide type="bottom" id="EwG-cR-m6g"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Wtj-eJ-V4a">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="98" id="adJ-xy-e9V" customClass="FriendTableViewCell" customModule="FitSquad" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="98"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="adJ-xy-e9V" id="XZL-Na-1AI">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="97"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Td7-Z6-H22" userLabel="Profile Picture">
-                                            <rect key="frame" x="8" y="12" width="73" height="73"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ciV-99-IQL">
-                                            <rect key="frame" x="104" y="38" width="45" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b7Y-xW-DFq">
+                                <rect key="frame" x="171" y="318" width="32" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Next"/>
                                 <connections>
-                                    <outlet property="nameLabel" destination="ciV-99-IQL" id="emd-Cu-9wg"/>
-                                    <outlet property="profileImageView" destination="Td7-Z6-H22" id="Uu4-za-jYx"/>
+                                    <segue destination="zP8-lS-max" kind="show" identifier="CreateTeamSegue" id="0cV-qq-dxd"/>
                                 </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="cAO-Zu-poD" id="0tN-bj-Zlk"/>
-                            <outlet property="delegate" destination="cAO-Zu-poD" id="L5B-cj-Ujq"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YdM-MC-efh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter team name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1J8-TL-GiG">
+                                <rect key="frame" x="89" y="209" width="196" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="nameInput" destination="1J8-TL-GiG" id="5ga-Ck-g2X"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wMj-Rb-Eus" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1740" y="-1020"/>
+            <point key="canvasLocation" x="1740" y="-987.25637181409309"/>
         </scene>
         <!--Team vs. Team-->
         <scene sceneID="3gi-Ow-W0c">
@@ -263,9 +256,54 @@
             </objects>
             <point key="canvasLocation" x="-164" y="-638.2308845577212"/>
         </scene>
+        <!--Pick Team Table View Controller-->
+        <scene sceneID="VA8-X1-qXT">
+            <objects>
+                <tableViewController id="zP8-lS-max" customClass="PickTeamTableViewController" customModule="FitSquad" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="98" sectionHeaderHeight="28" sectionFooterHeight="28" id="rI9-jn-NR4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="98" id="bVb-bK-AcC" customClass="FriendTableViewCell" customModule="FitSquad" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="98"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bVb-bK-AcC" id="T71-AN-BdB">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="97"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gbf-sO-KAH" userLabel="Profile Picture">
+                                            <rect key="frame" x="8" y="12" width="73" height="73"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bwg-PO-2Rv">
+                                            <rect key="frame" x="104" y="38" width="45" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="nameLabel" destination="Bwg-PO-2Rv" id="KGj-4w-PqY"/>
+                                    <outlet property="profileImageView" destination="Gbf-sO-KAH" id="sC6-mv-FBK"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="zP8-lS-max" id="qH2-eN-Vx9"/>
+                            <outlet property="delegate" destination="zP8-lS-max" id="9AZ-GT-TGp"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4zq-vp-QQQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2727" y="-987"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="DefaultImage" width="1512" height="1512"/>
+        <image name="DefaultImage" width="300" height="300"/>
         <image name="Xmark" width="348" height="297"/>
     </resources>
 </document>

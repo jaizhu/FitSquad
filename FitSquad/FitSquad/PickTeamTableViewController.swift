@@ -19,10 +19,14 @@ class PickTeamTableViewController: UITableViewController {
     // Value: name, pictureURL
     var friends = [String: [String]]()
     
+    // Team name passed in from TeamNameViewController
+    var teamName = String()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.title = "Select Teammates"
+//        self.title = "Select Teammates"
+        self.title = teamName
         
 //        let dynamicTxtField: UITextField = UITextField()
 //        dynamicTxtField.backgroundColor = UIColor.lightGray

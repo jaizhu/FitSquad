@@ -106,7 +106,7 @@ class CompetitionTableViewController: UITableViewController {
     
     private func loadCompetitions() {
         
-        var userEmail = String()
+        var userId = String()
         
         let graphRequest:FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "email"])
         
@@ -117,16 +117,17 @@ class CompetitionTableViewController: UITableViewController {
             } else {
                 // You successfully got the email of yourself, print it
                 let response = result as AnyObject?
-                let email = response?.object(forKey: "email") as AnyObject?
-                if let unwrapped = email {
-                    userEmail = unwrapped as! String
+                let id = response?.object(forKey: "id") as AnyObject?
+                if let unwrapped = id {
+                    userId = unwrapped as! String
                 }
             }
             
+            print(userId)
             // TODO: Get competitions from Firebase based on user email
-            print("LOGIN INFO: ")
-            print(userEmail)
-            self.title = userEmail + "\'s Competitions" // TODO: Deleteme
+//            print("LOGIN INFO: ")
+//            print(userEmail)
+//            self.title = userEmail + "\'s Competitions" // TODO: Deleteme
             
         })
         
