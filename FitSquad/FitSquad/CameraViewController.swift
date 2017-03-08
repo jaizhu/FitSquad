@@ -119,18 +119,66 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         getCompetitionPhotos(teamName: "team 1")
     }
     
+    func extendArray(old: inout Array<String>, new: Array<String>) {
+        old += new
+        print(old)
+    }
     
     func getCompetitionPhotos(teamName : String) -> [String : String] {   // team name and get back Name & Photo for
         
         // Get team members
         var users = [String]()
+        
         firebase.ref.child("teams")
             .queryOrdered(byChild: "name")
             .queryEqual(toValue: teamName)
-            .observe(.value, with: { snapshot in
-                let dict = snapshot.value as? [String:AnyObject]
-                print(dict![0])
-        })
+            .observe(.value, with: {(snapshot : FIRDataSnapshot) in
+                if let dict = snapshot.value as? NSDictionary {
+                    let teamData = dict.allValues.first! as? NSDictionary
+                    let newUsers = (teamData!["users"]! as! NSArray).flatMap({ $0 as? String})
+                    [self.users addObject: newUsers];
+                    
+                    users = (teamData!["users"]! as! NSArray).flatMap({ $0 as? String})
+                    
+                    var photos = [String : String]()
+                    
+                    var name : String?
+                    name = nil
+                    
+                    var photoBase64 : String?
+                    photoBase64 = nil
+                    
+                    
+                    for user in users {
+                        print(user)
+                        self.firebase.ref.child("users")
+                            .queryOrderedByKey()
+                            .queryEqual(toValue: user)
+                            .observe(.value, with: { (snapshot : FIRDataSnapshot) in
+                                if let dict = snapshot.value as? NSDictionary {
+                                    let userData = dict.allValues.first! as? NSDictionary
+                                    name = userData!["name"]! as! String
+                                }
+                                
+                                
+                            })
+                        
+                        firebase.ref.child("photos")
+                            .queryOrdered(byChild: user as! String)
+                            .queryEqual(toValue: user)
+                            .observe(.value, with: { snapshot in
+                                if let snapshotValue = snapshot.value as? [String:Any] {
+                                    photoBase64 = snapshotValue["photoBase64"] as! String
+                                }
+                            })
+                        photos[name!] = photoBase64!
+                    }
+                    
+                    return photos
+                }
+
+                }
+            })
         
         var photos = [String : String]()
         var name : String?
@@ -138,18 +186,22 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         var photoBase64 : String?
         photoBase64 = nil
         
+        print(users)
+        
+        
         for user in users {
+            print(user)
             firebase.ref.child("users")
                 .queryOrderedByKey()
-                .queryEqual(toValue: user)
-                .observe(.value, with: { snapshot in
-                    if let snapshotValue = snapshot.value as? [String:Any] {
-                        name = snapshotValue["name"] as! String
+                .queryEqual(toValue: user as! String)
+                .observe(.value, with: { (snapshot : FIRDataSnapshot) in
+                    if let dict = snapshot.value as? NSDictionary {
+                        print(dict["users"])
                     }
                 })
             
             firebase.ref.child("photos")
-                .queryOrdered(byChild: user)
+                .queryOrdered(byChild: user as! String)
                 .queryEqual(toValue: user)
                 .observe(.value, with: { snapshot in
                     if let snapshotValue = snapshot.value as? [String:Any] {
