@@ -7,11 +7,16 @@
 //
 
 import UIKit
+import Firebase
+import Foundation
 
 class TeamMemberTableViewController: UITableViewController {
     
     var teams = [String]()
-    var users = [[Member]]()
+    var t1Users = [Member]()
+    var t2Users = [Member]()
+    
+    let firebase = FIRDatabase.database().reference()
 
     @IBOutlet weak var competitionTitle: UINavigationItem!
     
@@ -32,7 +37,7 @@ class TeamMemberTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users[section].count
+        return t1Users.count
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -51,7 +56,13 @@ class TeamMemberTableViewController: UITableViewController {
             fatalError("The dequeued cell is not an instance of TeamMemberTableViewCell.")
         }
 
-        let member = users[indexPath.section][indexPath.row]
+        var member = t1Users[0]
+        
+        if t2Users.isEmpty {
+            member = t1Users[indexPath.row]
+        } else {
+            member = t2Users[indexPath.row]
+        }
         
         cell.nameLabel.text = member.name
 
@@ -115,30 +126,153 @@ class TeamMemberTableViewController: UITableViewController {
     // MARK: Private methods
     
     private func loadSampleTeam() {
+        var dateFormatter = DateFormatter()
+        dateFormatter.locale = NSLocale.current
+        dateFormatter.dateStyle = .medium
+        let dateString = dateFormatter.string(from: Date())
         
-        // TODO: Get member info from firebase
+        
         print(teams)
         self.title = teams[0] + " vs. " + teams[1]
         
-        // Get Team 1
+        // Get Team 1 member & photos
+        var t1UserIds = [String]()
         
-        // Get Team 2
-        guard let rachel = Member(name: "Rachel", photo: UIImage(named: "RachelGym"), participated: true) else {
-            fatalError("Unable to instantiate Rachel")
-        }
+        firebase.ref.child("teams")
+        .queryOrdered(byChild: "name")
+        .queryEqual(toValue: teams[0])
+        .observe(.value, with: {(snapshot : FIRDataSnapshot) in
+                if let dict = snapshot.value as? NSDictionary {
+                    let teamData = dict.allValues.first! as? NSDictionary
+                    // print(teamData)
+                    t1UserIds = (teamData!["users"]! as! NSArray).flatMap({ $0 as? String})
+                    
+                    var name : String?
+                    name = nil
+                    
+                    var photoBase64 : String?
+                    photoBase64 = nil
+                    
+                    for userId in t1UserIds {
+                        self.firebase.ref.child("users").child(userId)
+                            .observe(.value, with: { (snapshot : FIRDataSnapshot) in
+                                let dict = snapshot.value as! NSDictionary
+                                name = dict["name"]! as! String
+                                
+                                dump(self.firebase.ref.child("photos")
+                                    .queryOrdered(byChild: "user")
+                                    .queryEqual(toValue: userId))
+                                self.firebase.ref.child("photos")
+                                    .queryOrdered(byChild: "user")
+                                    .queryEqual(toValue: userId)
+                                    .observe(.value, with: { snapshot in
+                                        if snapshot.value == nil {  // User has no photos
+                                            guard let newUser = Member(name: name!, photo: UIImage(named: "DefaultPhoto"), participated: false)  else {
+                                                fatalError("Unable to instantiate user")
+                                            }
+                                            self.t1Users.append(newUser)
+                                        } else {
+                                            let dict = snapshot.value as! NSDictionary
+                                            photoBase64 = nil
+                                            for pic in dict.allValues {
+                                                var picData = pic as! NSDictionary
+                                                if (picData["date"] as! String) == dateString { // User has photo from today
+                                                    photoBase64 = picData["photoBase64"] as! String
+                                                }
+                                            }
+                                        
+                                            if photoBase64 == nil { // User has no photos from today
+                                                guard let newUser = Member(name: name!, photo: UIImage(named: "DefaultPhoto"), participated: false)  else {
+                                                        fatalError("Unable to instantiate user")
+                                                    }
+                                                self.t1Users.append(newUser)
+                                            } else {    // User has photo from today
+                                                let dataDecoded:NSData = NSData(base64Encoded: photoBase64!, options: NSData.Base64DecodingOptions(rawValue: 0))!
+                                                let decodedImage:UIImage = UIImage(data: dataDecoded as Data)!
+                                        
+                                                guard let newUser = Member(name: name!, photo: decodedImage, participated: true) else {
+                                                    fatalError("Unable to instantiate user") }
+                                                self.t1Users.append(newUser)
+                                            }
+                                        }
+                                dump(self.t1Users)
+                                self.tableView.reloadData()
+                            })
+                        })
+                    }
+            }
+            
+        })
         
-        guard let danielle = Member(name: "Danielle", photo: UIImage(named: "RachelGym"), participated: false) else {
-            fatalError("Unable to instantiate Danielle")
-        }
+        // Get Team 2 member & photos
+        var t2UserIds = [String]()
         
-        guard let jaimie = Member(name: "Jaimie", photo: UIImage(named: "RachelGym"), participated: false) else {
-            fatalError("Unable to instantiate Jaimie")
-        }
-        
-        users += [[rachel, danielle, jaimie]]
-        
-        // Pretend this is another team
-        users += [[rachel, danielle, jaimie]]
-        
+        firebase.ref.child("teams")
+            .queryOrdered(byChild: "name")
+            .queryEqual(toValue: teams[1])
+            .observe(.value, with: {(snapshot : FIRDataSnapshot) in
+                if let dict = snapshot.value as? NSDictionary {
+                    let teamData = dict.allValues.first! as? NSDictionary
+                    t2UserIds = (teamData!["users"]! as! NSArray).flatMap({ $0 as? String})
+                    
+                    var name : String?
+                    name = nil
+                    
+                    var photoBase64 : String?
+                    photoBase64 = nil
+                    
+                    for userId in t2UserIds {
+                        self.firebase.ref.child("users").child(userId)
+                            .observe(.value, with: { (snapshot : FIRDataSnapshot) in
+                                if let dict = snapshot.value as? NSDictionary {
+                                    name = dict["name"]! as! String
+                                }
+                                
+                                
+                                self.firebase.ref.child("photos")
+                                    .queryOrdered(byChild: "user")
+                                    .queryEqual(toValue: userId)
+                                    .observe(.value, with: { snapshot in
+                                        if snapshot.value == nil {  // User has no photos
+                                            guard let newUser = Member(name: name!, photo: UIImage(named: "DefaultPhoto"), participated: false)  else {
+                                                fatalError("Unable to instantiate user")
+                                            }
+                                            self.t2Users.append(newUser)
+                                        } else {
+                                            if let dict = snapshot.value as? NSDictionary {    // TODO: Sort photos by date
+                                                photoBase64 = nil
+                                                for pic in dict.allValues {
+                                                    var picData = pic as! NSDictionary
+                                                    if (picData["date"] as! String) == dateString { // User has photo from today
+                                                        photoBase64 = picData["photoBase64"] as! String
+                                                        break;
+                                                    }
+                                                }
+                                                
+                                                if photoBase64 == nil { // User has no photos from today
+                                                    guard let newUser = Member(name: name!, photo: UIImage(named: "DefaultPhoto"), participated: false)  else {
+                                                        fatalError("Unable to instantiate user")
+                                                    }
+                                                    self.t2Users.append(newUser)
+                                                } else {    // User has photo from today
+                                                    let dataDecoded:NSData = NSData(base64Encoded: photoBase64!, options: NSData.Base64DecodingOptions(rawValue: 0))!
+                                                    let decodedImage:UIImage = UIImage(data: dataDecoded as Data)!
+                                                    
+                                                    guard let newUser = Member(name: name!, photo: decodedImage, participated: true) else {
+                                                        fatalError("Unable to instantiate user")
+                                                    }
+                                                    self.t2Users.append(newUser)
+                                                }
+                                            }
+                                            dump(self.t2Users)
+                                            self.tableView.reloadData()
+                                        }
+                                    })
+                            })
+                    }
+                }
+                
+            })
+
     }
 }

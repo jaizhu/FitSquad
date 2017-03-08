@@ -155,11 +155,8 @@ class CompetitionTableViewController: UITableViewController {
                                                 var newComp = [compData["team1"]!, compData["team2"]!]
                                                 self.competitions.append(newComp as! [String])
                                             }
-                                            print("here")
-                                            print(self.competitions)
                                             self.tableView.reloadData()
                                         }
-                                        
                                     })
                             })
                     }
