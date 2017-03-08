@@ -119,8 +119,8 @@ class CompetitionTableViewController: UITableViewController {
             } else {
                 // You successfully got the email of yourself, print it
                 let response = result as AnyObject?
-                let email = response?.object(forKey: "id") as AnyObject?
-                if let unwrapped = email {
+                let id = response?.object(forKey: "id") as AnyObject?
+                if let unwrapped = id {
                     userId = unwrapped as! String
                 }
             }

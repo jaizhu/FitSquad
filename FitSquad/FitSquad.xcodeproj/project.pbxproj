@@ -11,6 +11,7 @@
 		0208F7CE1E6F3DE2009FB2A4 /* TeamMemberTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0208F7CD1E6F3DE2009FB2A4 /* TeamMemberTableViewController.swift */; };
 		0208F7D01E6F4101009FB2A4 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0208F7CF1E6F4101009FB2A4 /* Member.swift */; };
 		0208F7D21E6F8C77009FB2A4 /* CompetitionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0208F7D11E6F8C77009FB2A4 /* CompetitionTableViewController.swift */; };
+		0208F7D41E7021BD009FB2A4 /* TeamNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0208F7D31E7021BD009FB2A4 /* TeamNameViewController.swift */; };
 		2B19DA51EFD5A22B4DF25CBF /* Pods_FitSquad.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70994FE58AE7F7D3B966D4FB /* Pods_FitSquad.framework */; };
 		CCB094681E48109F002A099D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CCB094671E48109E002A099D /* GoogleService-Info.plist */; };
 		CCB094691E48109F002A099D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CCB094671E48109E002A099D /* GoogleService-Info.plist */; };
@@ -25,7 +26,8 @@
 		CD3220691E354C1800CFB952 /* FitSquadUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3220681E354C1800CFB952 /* FitSquadUITests.swift */; };
 		CD5711701E6B6318000DE7F1 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD57116F1E6B6318000DE7F1 /* CameraViewController.swift */; };
 		CD5711721E6B6333000DE7F1 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5711711E6B6333000DE7F1 /* ProfileViewController.swift */; };
-		CD74D8CD1E6FAA7E000E448F /* PickTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD74D8CC1E6FAA7D000E448F /* PickTeamViewController.swift */; };
+		CD74D8CD1E6FAA7E000E448F /* PickTeamTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD74D8CC1E6FAA7D000E448F /* PickTeamTableViewController.swift */; };
+		CD74D8CF1E70095F000E448F /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD74D8CE1E70095F000E448F /* FriendTableViewCell.swift */; };
 		DB274E0EAECA6EC64D680C52 /* Pods_FitSquadUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F20CECD9EA5C1C4F32EEEED /* Pods_FitSquadUITests.framework */; };
 		EB81DC7DA64CBF52C26F8184 /* Pods_FitSquadTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E93F56545F5213F618FA7E /* Pods_FitSquadTests.framework */; };
 /* End PBXBuildFile section */
@@ -52,6 +54,7 @@
 		0208F7CD1E6F3DE2009FB2A4 /* TeamMemberTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamMemberTableViewController.swift; sourceTree = "<group>"; };
 		0208F7CF1E6F4101009FB2A4 /* Member.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 		0208F7D11E6F8C77009FB2A4 /* CompetitionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompetitionTableViewController.swift; sourceTree = "<group>"; };
+		0208F7D31E7021BD009FB2A4 /* TeamNameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamNameViewController.swift; sourceTree = "<group>"; };
 		2491068E45530A99A38A1DD7 /* Pods-FitSquad.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitSquad.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FitSquad/Pods-FitSquad.debug.xcconfig"; sourceTree = "<group>"; };
 		4F20CECD9EA5C1C4F32EEEED /* Pods_FitSquadUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FitSquadUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6835865E4B34329A35820075 /* Pods-FitSquadUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitSquadUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FitSquadUITests/Pods-FitSquadUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -81,7 +84,8 @@
 		CD57117F1E6B6CCA000DE7F1 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../../../../../Downloads/FacebookSDKs-iOS-4.20.0/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
 		CD5711801E6B6CCA000DE7F1 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "../../../../../Downloads/FacebookSDKs-iOS-4.20.0/FBSDKShareKit.framework"; sourceTree = "<group>"; };
 		CD74D8CB1E6F38E9000E448F /* FitSquad.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FitSquad.entitlements; sourceTree = "<group>"; };
-		CD74D8CC1E6FAA7D000E448F /* PickTeamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickTeamViewController.swift; sourceTree = "<group>"; };
+		CD74D8CC1E6FAA7D000E448F /* PickTeamTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickTeamTableViewController.swift; sourceTree = "<group>"; };
+		CD74D8CE1E70095F000E448F /* FriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
 		E2E93F56545F5213F618FA7E /* Pods_FitSquadTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FitSquadTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB2EE4A283D551CBCB021844 /* Pods-FitSquad.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitSquad.release.xcconfig"; path = "Pods/Target Support Files/Pods-FitSquad/Pods-FitSquad.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -162,7 +166,9 @@
 				0208F7CD1E6F3DE2009FB2A4 /* TeamMemberTableViewController.swift */,
 				CD57116F1E6B6318000DE7F1 /* CameraViewController.swift */,
 				CD5711711E6B6333000DE7F1 /* ProfileViewController.swift */,
-				CD74D8CC1E6FAA7D000E448F /* PickTeamViewController.swift */,
+				0208F7D31E7021BD009FB2A4 /* TeamNameViewController.swift */,
+				CD74D8CC1E6FAA7D000E448F /* PickTeamTableViewController.swift */,
+				CD74D8CE1E70095F000E448F /* FriendTableViewCell.swift */,
 				CD32204C1E354C1800CFB952 /* Main.storyboard */,
 				CD32204F1E354C1800CFB952 /* Assets.xcassets */,
 				CD3220511E354C1800CFB952 /* LaunchScreen.storyboard */,
@@ -494,15 +500,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD74D8CD1E6FAA7E000E448F /* PickTeamViewController.swift in Sources */,
+				CD74D8CD1E6FAA7E000E448F /* PickTeamTableViewController.swift in Sources */,
 				CD32204B1E354C1800CFB952 /* HomeViewController.swift in Sources */,
 				CD3220491E354C1800CFB952 /* AppDelegate.swift in Sources */,
 				CD5711721E6B6333000DE7F1 /* ProfileViewController.swift in Sources */,
+				CD74D8CF1E70095F000E448F /* FriendTableViewCell.swift in Sources */,
 				0208F7CE1E6F3DE2009FB2A4 /* TeamMemberTableViewController.swift in Sources */,
 				CD1079FB1E6CFBFC000A0394 /* LoginViewController.swift in Sources */,
 				0208F7D21E6F8C77009FB2A4 /* CompetitionTableViewController.swift in Sources */,
 				0208F7C81E6F2CF9009FB2A4 /* TeamMemberTableViewCell.swift in Sources */,
 				CD5711701E6B6318000DE7F1 /* CameraViewController.swift in Sources */,
+				0208F7D41E7021BD009FB2A4 /* TeamNameViewController.swift in Sources */,
 				0208F7D01E6F4101009FB2A4 /* Member.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -37,7 +37,7 @@ class TeamMemberTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return t1Users.count
+        return min(t1Users.count, t2Users.count)
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -48,6 +48,7 @@ class TeamMemberTableViewController: UITableViewController {
         return nil
     }
     
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cellIdentifier = "TeamMemberTableViewCell"
@@ -56,7 +57,7 @@ class TeamMemberTableViewController: UITableViewController {
             fatalError("The dequeued cell is not an instance of TeamMemberTableViewCell.")
         }
 
-        var member = t1Users[0]
+        var member : Member
         
         if t2Users.isEmpty {
             member = t1Users[indexPath.row]
@@ -204,6 +205,7 @@ class TeamMemberTableViewController: UITableViewController {
             
         })
         
+
         // Get Team 2 member & photos
         var t2UserIds = [String]()
         
