@@ -120,6 +120,9 @@ class TeamMemberTableViewController: UITableViewController {
         print(teams)
         self.title = teams[0] + " vs. " + teams[1]
         
+        // Get Team 1
+        
+        // Get Team 2
         guard let rachel = Member(name: "Rachel", photo: UIImage(named: "RachelGym"), participated: true) else {
             fatalError("Unable to instantiate Rachel")
         }

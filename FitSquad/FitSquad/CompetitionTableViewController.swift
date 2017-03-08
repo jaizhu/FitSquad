@@ -16,7 +16,7 @@ import Firebase
 class CompetitionTableViewController: UITableViewController {
     let firebase = FIRDatabase.database().reference()
     
-    var competitions = [["Dogdogdog", "Catcatcat"], ["Dogdogdog", "dummy team"]]
+    var competitions = [[String]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -125,20 +125,45 @@ class CompetitionTableViewController: UITableViewController {
                 }
             }
             
-            // TODO: Get competitions from Firebase based on user email
             print("LOGIN INFO: ")
             print(userId)
-//            self.title = userEmail + "\'s Competitions" // TODO: Deleteme
             
-            self.firebase.ref.child("users")
-                .queryEqual(toValue: userId)
-                .observe(.value, with: { snapshot in
-                    let dict = snapshot.value as? [String:AnyObject]
-                    print(dict![0])
+            self.firebase.ref.child("users").child(userId)
+                .observe(.value, with: {(snapshot : FIRDataSnapshot) in
+                    if let dict = snapshot.value as? NSDictionary {
+                        let team = dict["team"]! as! String
+                        
+                        self.firebase.ref.child("competitions")
+                        .queryOrdered(byChild: "team1")
+                        .queryEqual(toValue: team)
+                        .observe(.value, with: {(snapshot : FIRDataSnapshot) in
+                                if let dict = snapshot.value as? NSDictionary {
+                                    for comp in dict.allValues {
+                                        var compData = comp as! NSDictionary
+                                        var newComp = [compData["team1"]!, compData["team2"]!]
+                                        self.competitions.append(newComp as! [String])
+                                    }
+                                }
+                                
+                                self.firebase.ref.child("competitions")
+                                    .queryOrdered(byChild: "team2")
+                                    .queryEqual(toValue: team)
+                                    .observe(.value, with: {(snapshot : FIRDataSnapshot) in
+                                        if let dict = snapshot.value as? NSDictionary {
+                                            for comp in dict.allValues {
+                                                var compData = comp as! NSDictionary
+                                                var newComp = [compData["team1"]!, compData["team2"]!]
+                                                self.competitions.append(newComp as! [String])
+                                            }
+                                            print("here")
+                                            print(self.competitions)
+                                            self.tableView.reloadData()
+                                        }
+                                        
+                                    })
+                            })
+                    }
                 })
-            
         })
-        
     }
-
 }
