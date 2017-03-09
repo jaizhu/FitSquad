@@ -180,9 +180,6 @@ class TeamMemberTableViewController: UITableViewController {
                                             } else {    // User has photo from today
                                                 let dataDecoded:NSData = NSData(base64Encoded: photoBase64!, options: NSData.Base64DecodingOptions(rawValue: 0))!
                                                 let decodedImage:UIImage = UIImage(data: dataDecoded as Data)!
-                                        
-//                                                guard let newUser = Member(name: name!, photo: decodedImage, participated: true) else {
-//                                                    fatalError("Unable to instantiate user") }
                                                 newUser!.photo = decodedImage
                                                 newUser!.participated = true
                                                 self.t1Users.append(newUser!)
