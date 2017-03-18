@@ -29,24 +29,15 @@ class ProfileViewController: UIViewController {
         
         imageView.frame = CGRect(x: 0, y: 0, width: 100, height: 200)
         
+        // set naviation bar
         let navBar: UINavigationBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 55))
         self.view.addSubview(navBar)
         let navItem = UINavigationItem(title: "Name")
         
-        
-        let btn1 = UIButton(type: .custom)
-        btn1.setTitle("Logout", for: .normal)
-//        btn1.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-        btn1.addTarget(self, action: #selector(fbLogoutButtonClicked), for: .touchUpInside)
-        let item1 = UIBarButtonItem(customView: btn1)
-        navItem.rightBarButtonItem = item1
-        
+        // set logout button
+        let thing = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(fbLogoutButtonClicked))
+        navItem.rightBarButtonItem = thing
         navBar.setItems([navItem], animated: false)
-        
-//        let logoutItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.play, target: self, action: #selector(fbLogoutButtonClicked))
-//        logoutItem.title = "Logout"
-//        navItem.rightBarButtonItem = logoutItem
-//        navBar.setItems([navItem], animated: false)
         
         getProfilePict()
         
@@ -75,10 +66,13 @@ class ProfileViewController: UIViewController {
     }
     
     func fbLogoutButtonClicked() {
-        print("USER IS LOGGING OUT FUCK")
-        // this doesn't do anything yet
+        print("USER IS LOGGING OUT")
+        // log user out
         let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
         fbLoginManager.logOut()
+        // return to login page
+        let viewController = self.storyboard!.instantiateViewController(withIdentifier: "loginViewController") as UIViewController
+        self.present(viewController, animated: true, completion: nil)
     }
     
 }

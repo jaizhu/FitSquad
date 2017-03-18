@@ -61,7 +61,6 @@ class LoginViewController: UIViewController {
                 if (fbLoginResult.grantedPermissions == nil) {
                     if (fbLoginResult.grantedPermissions.contains("email")) {
                         self.getFBUserData()
-                        fbLoginManager.logOut()
                         self.fbLoginSuccess = true
                         print("LOGGED IN")
                     }

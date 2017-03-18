@@ -22,11 +22,11 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Vz1-9u-PMM" id="buO-h7-Juz">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FYT-fn-xaR">
-                                            <rect key="frame" x="15" y="0.0" width="345" height="43"/>
+                                            <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -108,7 +108,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8Jk-Gh-sWg" id="flS-wi-TRm">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="99"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="DefaultImage" translatesAutoresizingMaskIntoConstraints="NO" id="NZg-gQ-b3H">
@@ -260,7 +260,7 @@
         <!--Login View Controller-->
         <scene sceneID="Nhh-en-r71">
             <objects>
-                <viewController id="n4T-1x-n83" customClass="LoginViewController" customModule="FitSquad" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loginViewController" id="n4T-1x-n83" customClass="LoginViewController" customModule="FitSquad" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zYz-bq-RfZ"/>
                         <viewControllerLayoutGuide type="bottom" id="keU-wA-WTw"/>
@@ -331,7 +331,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="98"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bVb-bK-AcC" id="T71-AN-BdB">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="97"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="97.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gbf-sO-KAH" userLabel="Profile Picture">
@@ -369,6 +369,6 @@
         <image name="Xmark" width="348" height="297"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="GVl-mw-pKs"/>
+        <segue reference="v8k-HB-haa"/>
     </inferredMetricsTieBreakers>
 </document>
