@@ -39,8 +39,7 @@ class ProfileViewController: UIViewController {
         navItem.rightBarButtonItem = thing
         navBar.setItems([navItem], animated: false)
         
-        getProfilePict()
-        
+        getProfilePic()
     }
     
     override func didReceiveMemoryWarning() {
@@ -48,8 +47,50 @@ class ProfileViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func getProfilePict() {
+    func getProfilePic() {
         print("--------------- getting profile pic")
+        
+        // getting profile picture
+        let params = ["fields": "picture.type(large)"]
+        let graphRequest:FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: params)
+        
+        graphRequest.start(completionHandler: { (connection, result, error) -> Void in
+            if ((error) != nil) {
+                // Process error
+                print("Error: \(error)")
+            } else {
+                let recvd_data = result as! NSDictionary?
+                
+                let dict1 = recvd_data?["picture"] as! NSDictionary?
+                let dict1data = dict1?["data"]
+                let dict2 = dict1data as! NSDictionary?
+                let dict2data = dict2?["url"]
+                let realURL = dict2data as! NSString?
+                let strURL = realURL as! String
+                
+                let profileURL = URL(string: strURL)
+                self.downloadImage(url: profileURL!)
+            }
+        })
+    }
+    
+    func downloadImage(url: URL) {
+        print("** Download Started")
+        getDataFromUrl(url: url) { (data, response, error)  in
+            guard let data = data, error == nil else { return }
+            print(response?.suggestedFilename ?? url.lastPathComponent)
+            print("** Download Finished")
+            DispatchQueue.main.async() { () -> Void in
+                self.profilePic.image = UIImage(data: data)
+            }
+        }
+    }
+    
+    func getDataFromUrl(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {
+        URLSession.shared.dataTask(with: url) {
+            (data, response, error) in
+            completion(data, response, error)
+            }.resume()
     }
     
     func getStreak() {
