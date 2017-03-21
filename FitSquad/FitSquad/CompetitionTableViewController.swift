@@ -13,6 +13,8 @@ import FacebookCore
 import FacebookLogin
 import Firebase
 
+var USERID = ""
+
 class CompetitionTableViewController: UITableViewController {
     let firebase = FIRDatabase.database().reference()
     
@@ -127,6 +129,7 @@ class CompetitionTableViewController: UITableViewController {
             
             print("LOGIN INFO: ")
             print(userId)
+            USERID = userId
             
             self.firebase.ref.child("users").child(userId)
                 .observe(.value, with: {(snapshot : FIRDataSnapshot) in
