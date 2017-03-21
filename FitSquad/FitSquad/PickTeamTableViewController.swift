@@ -63,10 +63,11 @@ class PickTeamTableViewController: UITableViewController {
     
     func rightButtonAction(sender: UIBarButtonItem) {
         // write to firebase
-        let team: NSDictionary = ["name": teamName, "users": teamUids]
+        let team: NSDictionary = ["name": teamName, "users": teamUids, "daily_count": 0]
         self.firebase.ref.child("teams").childByAutoId().setValue(team)
         
-        let comp : NSDictionary = ["points1": 0, "points2": 0, "team1": teamName, "team2": "Dog Squad"]
+        let comp : NSDictionary = ["points1": 0, "points2": 0, "team1": teamName, "team2": "Dog Squad", "end_date": "NEVER (currently)"]
+        // TODO (dconnol): Actually add an end date (three weeks from today's date...?)
         self.firebase.ref.child("competitions").childByAutoId().setValue(comp)
         
         let viewController = self.storyboard!.instantiateViewController(withIdentifier: "mainTabBar") as UIViewController
@@ -75,7 +76,7 @@ class PickTeamTableViewController: UITableViewController {
     
     // MARK: UITableViewDelegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("You tapped cell number \(indexPath.row).")
+//        print("You tapped cell number \(indexPath.row).")
         
         let tappedCell = self.tableView.cellForRow(at: indexPath)
 
@@ -124,11 +125,11 @@ class PickTeamTableViewController: UITableViewController {
     }
     
     func downloadImage(url: URL, cell: FriendTableViewCell) {
-        print("** Download Started")
+//        print("** Download Started")
         getDataFromUrl(url: url) { (data, response, error)  in
             guard let data = data, error == nil else { return }
             print(response?.suggestedFilename ?? url.lastPathComponent)
-            print("** Download Finished")
+//            print("** Download Finished")
             DispatchQueue.main.async() { () -> Void in
                 cell.profileImageView.image = UIImage(data: data)
             }

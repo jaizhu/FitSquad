@@ -16,7 +16,7 @@ import Firebase
 class CompetitionTableViewController: UITableViewController {
     let firebase = FIRDatabase.database().reference()
     
-    var competitions = [[String]]()
+    var competitions = [[String]]()   // [[team1, team2], [team1, team3]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,16 +93,13 @@ class CompetitionTableViewController: UITableViewController {
 
     let competitionSegueIdentifier = "CompetitionSegue"
     
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
         
         if  segue.identifier == competitionSegueIdentifier,
             let destination = segue.destination as? TeamMemberTableViewController,
             let competitionIndex = tableView.indexPathForSelectedRow?.row
         {
-            destination.teams = competitions[competitionIndex]
+            destination.teams = competitions[competitionIndex] // [team1, team2] passed to single competition view
         }
     }
     
@@ -125,40 +122,62 @@ class CompetitionTableViewController: UITableViewController {
                 }
             }
             
-            print("LOGIN INFO: ")
-            print(userId)
+//            print("LOGIN INFO: ")
+//            print(userId)
+            
+            // Get the list of user's competitions from firebase
+            // TODO: This should really be on ChildAdded instead of just checking everything every time but I don't really care enough to change it
+            self.competitions.removeAll()
             
             self.firebase.ref.child("users").child(userId)
                 .observe(.value, with: {(snapshot : FIRDataSnapshot) in
                     if let dict = snapshot.value as? NSDictionary {
-                        let team = dict["team"]! as! String
                         
-                        self.firebase.ref.child("competitions")
-                        .queryOrdered(byChild: "team1")
-                        .queryEqual(toValue: team)
-                        .observe(.value, with: {(snapshot : FIRDataSnapshot) in
-                                if let dict = snapshot.value as? NSDictionary {
-                                    for comp in dict.allValues {
-                                        var compData = comp as! NSDictionary
-                                        var newComp = [compData["team1"]!, compData["team2"]!]
-                                        self.competitions.append(newComp as! [String])
-                                    }
-                                }
-                                
-                                self.firebase.ref.child("competitions")
-                                    .queryOrdered(byChild: "team2")
-                                    .queryEqual(toValue: team)
-                                    .observe(.value, with: {(snapshot : FIRDataSnapshot) in
-                                        if let dict = snapshot.value as? NSDictionary {
-                                            for comp in dict.allValues {
-                                                var compData = comp as! NSDictionary
-                                                var newComp = [compData["team1"]!, compData["team2"]!]
-                                                self.competitions.append(newComp as! [String])
-                                            }
-                                            self.tableView.reloadData()
+                        let competition_list = (dict["teams"]! as! NSDictionary).allValues
+                        print("################# Current user list of competitionids: ")
+                        print(competition_list)
+//                        let team = dict["team"]! as! String
+                        
+                
+                        for team in competition_list {
+                        
+                            // Check team1
+                            self.firebase.ref.child("competitions")
+                                .queryOrdered(byChild: "team1")
+                                .queryEqual(toValue: team)
+                                .observe(.value, with: {(snapshot : FIRDataSnapshot) in
+                                    if let dict = snapshot.value as? NSDictionary {
+                                        for comp in dict.allValues {
+                                            var compData = comp as! NSDictionary
+                                            var newComp = [compData["team1"]!, compData["team2"]!]
+                                            self.competitions.append(newComp as! [String])
                                         }
-                                    })
-                            })
+                                        self.tableView.reloadData()
+                                    }
+                                    
+                                    // Check team2
+                                    self.firebase.ref.child("competitions")
+                                        .queryOrdered(byChild: "team2")
+                                        .queryEqual(toValue: team)
+                                        .observe(.value, with: {(snapshot : FIRDataSnapshot) in
+                                            if let dict = snapshot.value as? NSDictionary {
+                                                for comp in dict.allValues {
+                                                    var compData = comp as! NSDictionary
+                                                    var newComp = [compData["team1"]!, compData["team2"]!]
+                                                    self.competitions.append(newComp as! [String])
+                                                }
+                                                print(self.competitions)
+                                                self.tableView.reloadData()
+                                            }
+                                        })
+                                })
+                            
+                            
+                            
+                            
+                            
+                        }
+                        
                     }
                 })
         })

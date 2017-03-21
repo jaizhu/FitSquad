@@ -16,8 +16,6 @@ class MainTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        print("HAYYYYYY YAAA")
         
         myMainTabBar.items?[0].selectedImage = UIImage(named: "home")?.withRenderingMode(.alwaysOriginal)
         self.tabBar.items?[0].image = UIImage(named: "home")?.withRenderingMode(.alwaysOriginal)

@@ -60,7 +60,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
                 }
             }
         if let image = self.imageView.image {
-            let user = "testUser1"   // TODO: Get User
+//            let user = "testUser1"   // TODO: Get User
             var data: NSData = NSData()
             
             // Save photo to Firebase
@@ -77,6 +77,14 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
             
             // Write
             self.firebase.ref.child("photos").childByAutoId().setValue(photo)
+            
+            
+            // TODO (dconnol): Increment team's points
+            print("################ TEAM GETS A POINT YAY")
+            
+            
+            // TODO (dconnol): Increment team's daily photo upload count and check for bonus
+            
             
             }
         })
