@@ -25,7 +25,10 @@ class LoginViewController: UIViewController {
         print("login view loaded")
         
         let loginButton = LoginButton(readPermissions: [ .publicProfile, .email, .userFriends ])
-        loginButton.center = view.center
+        let horiz = self.view.bounds.width / 2
+        let vert = self.view.bounds.height - 100
+        let point = CGPoint(x: horiz, y: vert)
+        loginButton.center = point
         view.addSubview(loginButton)
         
         // Check if user is already logged in
@@ -61,7 +64,6 @@ class LoginViewController: UIViewController {
                 if (fbLoginResult.grantedPermissions == nil) {
                     if (fbLoginResult.grantedPermissions.contains("email")) {
                         self.getFBUserData()
-                        fbLoginManager.logOut()
                         self.fbLoginSuccess = true
                         print("LOGGED IN")
                     }

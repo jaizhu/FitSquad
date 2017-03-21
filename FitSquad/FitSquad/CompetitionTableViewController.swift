@@ -13,6 +13,8 @@ import FacebookCore
 import FacebookLogin
 import Firebase
 
+var USERID = ""
+
 class CompetitionTableViewController: UITableViewController {
     let firebase = FIRDatabase.database().reference()
     
@@ -122,12 +124,13 @@ class CompetitionTableViewController: UITableViewController {
                 }
             }
             
-//            print("LOGIN INFO: ")
-//            print(userId)
+            print("LOGIN INFO: ")
+            print(userId)
             
             // Get the list of user's competitions from firebase
             // TODO: This should really be on ChildAdded instead of just checking everything every time but I don't really care enough to change it
             self.competitions.removeAll()
+            USERID = userId
             
             self.firebase.ref.child("users").child(userId)
                 .observe(.value, with: {(snapshot : FIRDataSnapshot) in
@@ -171,13 +174,7 @@ class CompetitionTableViewController: UITableViewController {
                                             }
                                         })
                                 })
-                            
-                            
-                            
-                            
-                            
                         }
-                        
                     }
                 })
         })
