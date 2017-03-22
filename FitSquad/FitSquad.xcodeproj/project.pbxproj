@@ -20,7 +20,6 @@
 		CD3220491E354C1800CFB952 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3220481E354C1800CFB952 /* AppDelegate.swift */; };
 		CD32204B1E354C1800CFB952 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD32204A1E354C1800CFB952 /* HomeViewController.swift */; };
 		CD32204E1E354C1800CFB952 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD32204C1E354C1800CFB952 /* Main.storyboard */; };
-		CD3220501E354C1800CFB952 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD32204F1E354C1800CFB952 /* Assets.xcassets */; };
 		CD3220531E354C1800CFB952 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD3220511E354C1800CFB952 /* LaunchScreen.storyboard */; };
 		CD32205E1E354C1800CFB952 /* FitSquadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD32205D1E354C1800CFB952 /* FitSquadTests.swift */; };
 		CD3220691E354C1800CFB952 /* FitSquadUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3220681E354C1800CFB952 /* FitSquadUITests.swift */; };
@@ -30,6 +29,9 @@
 		CD5711721E6B6333000DE7F1 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5711711E6B6333000DE7F1 /* ProfileViewController.swift */; };
 		CD74D8CD1E6FAA7E000E448F /* PickTeamTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD74D8CC1E6FAA7D000E448F /* PickTeamTableViewController.swift */; };
 		CD74D8CF1E70095F000E448F /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD74D8CE1E70095F000E448F /* FriendTableViewCell.swift */; };
+		CDD73BCA1E81FB30004303E3 /* logo-large.png in Resources */ = {isa = PBXBuildFile; fileRef = CDD73BC81E81FB30004303E3 /* logo-large.png */; };
+		CDD73BCB1E81FB30004303E3 /* welcome-large.png in Resources */ = {isa = PBXBuildFile; fileRef = CDD73BC91E81FB30004303E3 /* welcome-large.png */; };
+		CDD73BCD1E820854004303E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDD73BCC1E820854004303E3 /* Assets.xcassets */; };
 		DB274E0EAECA6EC64D680C52 /* Pods_FitSquadUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F20CECD9EA5C1C4F32EEEED /* Pods_FitSquadUITests.framework */; };
 		EB81DC7DA64CBF52C26F8184 /* Pods_FitSquadTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E93F56545F5213F618FA7E /* Pods_FitSquadTests.framework */; };
 /* End PBXBuildFile section */
@@ -70,7 +72,6 @@
 		CD3220481E354C1800CFB952 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD32204A1E354C1800CFB952 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		CD32204D1E354C1800CFB952 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		CD32204F1E354C1800CFB952 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CD3220521E354C1800CFB952 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CD3220541E354C1800CFB952 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD3220591E354C1800CFB952 /* FitSquadTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FitSquadTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,6 +91,9 @@
 		CD74D8CB1E6F38E9000E448F /* FitSquad.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FitSquad.entitlements; sourceTree = "<group>"; };
 		CD74D8CC1E6FAA7D000E448F /* PickTeamTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickTeamTableViewController.swift; sourceTree = "<group>"; };
 		CD74D8CE1E70095F000E448F /* FriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
+		CDD73BC81E81FB30004303E3 /* logo-large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-large.png"; sourceTree = "<group>"; };
+		CDD73BC91E81FB30004303E3 /* welcome-large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome-large.png"; sourceTree = "<group>"; };
+		CDD73BCC1E820854004303E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E2E93F56545F5213F618FA7E /* Pods_FitSquadTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FitSquadTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB2EE4A283D551CBCB021844 /* Pods-FitSquad.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitSquad.release.xcconfig"; path = "Pods/Target Support Files/Pods-FitSquad/Pods-FitSquad.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -175,11 +179,13 @@
 				CD74D8CC1E6FAA7D000E448F /* PickTeamTableViewController.swift */,
 				CD74D8CE1E70095F000E448F /* FriendTableViewCell.swift */,
 				CD32204C1E354C1800CFB952 /* Main.storyboard */,
-				CD32204F1E354C1800CFB952 /* Assets.xcassets */,
+				CDD73BCC1E820854004303E3 /* Assets.xcassets */,
 				CD3220511E354C1800CFB952 /* LaunchScreen.storyboard */,
 				CCB094671E48109E002A099D /* GoogleService-Info.plist */,
 				CD3220541E354C1800CFB952 /* Info.plist */,
 				CD48D5491E706D9000397569 /* jabrill.png */,
+				CDD73BC81E81FB30004303E3 /* logo-large.png */,
+				CDD73BC91E81FB30004303E3 /* welcome-large.png */,
 			);
 			path = FitSquad;
 			sourceTree = "<group>";
@@ -293,7 +299,7 @@
 				TargetAttributes = {
 					CD3220441E354C1800CFB952 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 3MVK6497FQ;
+						DevelopmentTeam = K5V84SLLJ7;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -340,8 +346,10 @@
 			files = (
 				CD3220531E354C1800CFB952 /* LaunchScreen.storyboard in Resources */,
 				CCB094681E48109F002A099D /* GoogleService-Info.plist in Resources */,
-				CD3220501E354C1800CFB952 /* Assets.xcassets in Resources */,
+				CDD73BCB1E81FB30004303E3 /* welcome-large.png in Resources */,
 				CD32204E1E354C1800CFB952 /* Main.storyboard in Resources */,
+				CDD73BCD1E820854004303E3 /* Assets.xcassets in Resources */,
+				CDD73BCA1E81FB30004303E3 /* logo-large.png in Resources */,
 				CD48D54A1E706D9000397569 /* jabrill.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -674,7 +682,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = FitSquad/FitSquad.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 3MVK6497FQ;
+				DEVELOPMENT_TEAM = K5V84SLLJ7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -682,7 +690,7 @@
 				INFOPLIST_FILE = FitSquad/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = FitSquadFit.dogdogdog;
+				PRODUCT_BUNDLE_IDENTIFIER = FitSquad.dogdogdog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -696,7 +704,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = FitSquad/FitSquad.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 3MVK6497FQ;
+				DEVELOPMENT_TEAM = K5V84SLLJ7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -704,7 +712,7 @@
 				INFOPLIST_FILE = FitSquad/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = FitSquadFit.dogdogdog;
+				PRODUCT_BUNDLE_IDENTIFIER = FitSquad.dogdogdog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

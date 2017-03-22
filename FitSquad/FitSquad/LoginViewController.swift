@@ -1,4 +1,4 @@
-//
+
 //  LoginViewController.swift
 //  FitSquad
 //
@@ -24,12 +24,36 @@ class LoginViewController: UIViewController {
         
         print("login view loaded")
         
+        // login button
         let loginButton = LoginButton(readPermissions: [ .publicProfile, .email, .userFriends ])
         let horiz = self.view.bounds.width / 2
         let vert = self.view.bounds.height - 100
         let point = CGPoint(x: horiz, y: vert)
         loginButton.center = point
         view.addSubview(loginButton)
+        
+        // logo
+        let logoScaleFactor: CGFloat = 0.35
+        let logoImage = UIImage(named: "logo-large.png")
+        let logoImageView = UIImageView(image: logoImage)
+        let logo_width = logoScaleFactor * logoImageView.bounds.width
+        let logo_height = logoScaleFactor * logoImageView.bounds.height
+        let logo_x = (self.view.bounds.width / 2) - (logo_width / 2)
+        let logoPoint = CGPoint(x: logo_x, y: 70)
+        logoImageView.frame = CGRect(origin: logoPoint, size: CGSize(width: logo_width, height: logo_height))
+        self.view.addSubview(logoImageView)
+        
+        // welcome
+        let welcomeScaleFactor: CGFloat = 0.35
+        let welcomeImage = UIImage(named: "welcome-large.png")
+        let welcomeImageView = UIImageView(image: welcomeImage)
+        let welcome_width = welcomeScaleFactor * welcomeImageView.bounds.width
+        let welcome_height = welcomeScaleFactor * welcomeImageView.bounds.height
+        let welcome_x = (self.view.bounds.width / 2) - (welcome_width / 2)
+        let welcome_y = (self.view.bounds.height) - 350
+        let welcomePoint = CGPoint(x: welcome_x, y: welcome_y)
+        welcomeImageView.frame = CGRect(origin: welcomePoint, size: CGSize(width: welcome_width, height: welcome_height))
+        self.view.addSubview(welcomeImageView)
         
         // Check if user is already logged in
         if (AccessToken.current != nil) {
