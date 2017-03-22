@@ -11,9 +11,11 @@ import UIKit
 import FBSDKLoginKit
 import FacebookLogin
 import FacebookCore
-import Firebase
+import FirebaseDatabase
 
 class ProfileViewController: UIViewController {
+    
+    let firebase = FIRDatabase.database().reference()
     
     // Storyboard items
     @IBOutlet weak var profilePic: UIImageView!
@@ -21,8 +23,6 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var wins: UILabel!
     @IBOutlet weak var losses: UILabel!
     @IBOutlet weak var photosScrollView: UIScrollView!
-    
-    let firebase = FIRDatabase.database().reference()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +41,7 @@ class ProfileViewController: UIViewController {
         
         print(USERID)
         
-        getStreak()
+        getUserDBInfo()
         
     }
     
@@ -99,104 +99,18 @@ class ProfileViewController: UIViewController {
             }.resume()
     }
     
-    func getStreak() {
+    func getUserDBInfo() {
         print("--------------- getting user streak")
-        
-//        let ref = firebase.root.child("users").child(USERID)
-//        
-//        ref.observe(of: .value, with: { (snapshot: FIRDataSnapshot) in
-//            if snapshot.hasChildren() {
-//                print("has children")
-//            }
-//        })
-//        
-//        print("hi")
-        
-        
-//        firebase.ref.observeSingleEvent(of: .value, with: {(snapshot: FIRDataSnapshot) in
-//            
-//            if !snapshot.exists() {return}
-//            
-////            if let thing = snapshot.value["streak"] as? String {
-////                print(thing)
-////            }
-//            
-//            print(type(of: snapshot.value))
-//            print(snapshot.value)
-//            
-//            if snapshot.hasChildren() {
-//                let thing = snapshot.childSnapshot(forPath: "streak").value as! String
-//            }
-//            
-//            print("hi")
-//            
-//        })
-        
-        
-//        firebase.ref.child("users")
-//            .queryOrdered(byChild: "name")
-//            .queryEqual(toValue: teams[0])
-//            .observe(.value, with: {(snapshot : FIRDataSnapshot) in
-//                if let dict = snapshot.value as? NSDictionary {
-//                    let teamData = dict.allValues.first! as? NSDictionary
-//                    t1UserIds = (teamData!["users"]! as! NSArray).flatMap({ $0 as? String})
-//                    
-//                    var name : String?
-//                    name = nil
-//                    var photoBase64 : String?
-//                    photoBase64 = nil
-//                    
-//                    for userId in t1UserIds {
-//                        self.firebase.ref.child("users").child(userId)
-//                            .observe(.value, with: { (snapshot : FIRDataSnapshot) in
-//                                let dict = snapshot.value as! NSDictionary
-//                                name = dict["name"]! as! String
-//                                
-//                                var newUser = Member(name: name!, photo: UIImage(named: "DefaultPhoto"), participated: false)
-//                                self.firebase.ref.child("photos")
-//                                    .queryOrdered(byChild: "user")
-//                                    .queryEqual(toValue: userId)
-//                                    .observe(.value, with: { snapshot in
-//                                        if snapshot.value is NSNull {  // User has no photos
-//                                            self.t1Users.append(newUser!)
-//                                        } else {
-//                                            if let dict = snapshot.value as? NSDictionary {
-//                                                photoBase64 = nil
-//                                                for pic in dict.allValues {
-//                                                    var picData = pic as! NSDictionary
-//                                                    if (picData["date"] as! String) == dateString { // User has photo from today
-//                                                        photoBase64 = picData["photoBase64"] as! String
-//                                                    }
-//                                                }
-//                                                
-//                                                if photoBase64 == nil { // User has no photos from today
-//                                                    self.t1Users.append(newUser!)
-//                                                } else {    // User has photo from today
-//                                                    let dataDecoded:NSData = NSData(base64Encoded: photoBase64!, options: NSData.Base64DecodingOptions(rawValue: 0))!
-//                                                    let decodedImage:UIImage = UIImage(data: dataDecoded as Data)!
-//                                                    
-//                                                    //                                                guard let newUser = Member(name: name!, photo: decodedImage, participated: true) else {
-//                                                    //                                                    fatalError("Unable to instantiate user") }
-//                                                    newUser!.photo = decodedImage
-//                                                    newUser!.participated = true
-//                                                    self.t1Users.append(newUser!)
-//                                                }
-//                                            }
-//                                        }
-//                                        
-//                                        if(self.t1Users.count == 3) {
-//                                            self.tableView.reloadData()
-//                                        }
-//                                    })
-//                            })
-//                    }
-//                }
-//                
-//            })
-    }
-    
-    func getWinsLosses() {
-        print("--------------- getting wins and losses")
+        self.firebase.ref.child("users").child(USERID).observeSingleEvent(of: .value, with: { (snapshot) in
+            if let dict = snapshot.value as? NSDictionary {
+                print(dict)
+                let streak = dict["streak"] as? NSDecimalNumber ?? 0;
+                let wins = dict["wins"] as? NSDecimalNumber  ?? 0;
+                let losses = dict["losses"] as? NSDecimalNumber ?? 0;
+                
+                // Do something with streak, wins, and losses here
+            }
+        })
     }
     
     func getPhotos() {

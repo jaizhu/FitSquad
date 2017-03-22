@@ -130,12 +130,15 @@ class CompetitionTableViewController: UITableViewController {
             // Get the list of user's competitions from firebase
             // TODO: This should really be on ChildAdded instead of just checking everything every time but I don't really care enough to change it
             self.competitions.removeAll()
-            USERID = userId
+            // USERID = userId
+            // Change for db issues
+            USERID = "1800047986687854"
             
-            self.firebase.ref.child("users").child(userId)
+            self.firebase.ref.child("users").child(USERID)
                 .observe(.value, with: {(snapshot : FIRDataSnapshot) in
+                    if snapshot.exists() {
                     if let dict = snapshot.value as? NSDictionary {
-                        
+                        print(dict)
                         let competition_list = (dict["teams"]! as! NSDictionary).allValues
                         print("################# Current user list of competitionids: ")
                         print(competition_list)
@@ -176,6 +179,7 @@ class CompetitionTableViewController: UITableViewController {
                                 })
                         }
                     }
+                    } 
                 })
         })
     }
