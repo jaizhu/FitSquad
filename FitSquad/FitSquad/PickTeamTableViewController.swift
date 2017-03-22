@@ -63,10 +63,20 @@ class PickTeamTableViewController: UITableViewController {
     
     func rightButtonAction(sender: UIBarButtonItem) {
         // write to firebase
-        let team: NSDictionary = ["name": teamName, "users": teamUids, "daily_count": 0]
-        self.firebase.ref.child("teams").childByAutoId().setValue(team)
         
-        let comp : NSDictionary = ["points1": 0, "points2": 0, "team1": teamName, "team2": "Dog Squad", "end_date": "NEVER (currently)"]
+        // Add new team
+        let team: NSDictionary = ["name": teamName, "users": teamUids, "daily_count": 0]
+        let team_ref = self.firebase.ref.child("teams").childByAutoId()
+        team_ref.setValue(team)
+        
+        // Add team to users' objects
+        for user_id in teamUids {
+            let update = ["/users/\(user_id)/teams/\(teamName)": team_ref.key]
+            self.firebase.ref.updateChildValues(update)
+        }
+        
+        // Add competition
+        let comp : NSDictionary = ["points1": 0, "points2": 0, "team1": team_ref.key, "team1_name": teamName, "team2": "Dog Squad", "team2_name": "Dog Squad", "end_date": "NEVER (currently)"]
         // TODO (dconnol): Actually add an end date (three weeks from today's date...?)
         self.firebase.ref.child("competitions").childByAutoId().setValue(comp)
         
@@ -176,9 +186,9 @@ class PickTeamTableViewController: UITableViewController {
                         
                         self.friends.append([idStr!, nameStr!, urlStr])
                     }
-                    print("@@@@@@@@@@@@@@@@@@")
-                    print(self.friends)
-                    print("@@@@@@@@@@@@@@@@@@")
+//                    print("@@@@@@@@@@@@@@@@@@")
+//                    print(self.friends)
+//                    print("@@@@@@@@@@@@@@@@@@")
                     // async shit because of completion handler
                     self.tableView.reloadData()
                 }
