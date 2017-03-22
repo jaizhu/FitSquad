@@ -105,6 +105,29 @@ class CompetitionTableViewController: UITableViewController {
         }
     }
     
+    // Add competition described in dict to competition list on competition screen
+    private func addCompetition(dict: NSDictionary) {
+        
+        for comp in dict.allValues {
+            let compData = comp as! NSDictionary
+            let newComp = [compData["team1_name"]!, compData["team2_name"]!]
+            self.competitions.append(newComp as! [String])
+        }
+
+//        // Get actual team names instead of unique ids
+//        self.firebase.ref.child("teams")
+//            .child(user_team) //HERE
+//            .observe(.value, with: {(snapshot : FIRDataSnapshot) in
+//                if let team_dict = snapshot.value as? NSDictionary {
+//                    print("@@@@@@@@@@@@@@@@@@@ADDING NEW COMPETITION!! TEAM INFO: ")
+//                    print(team_dict)
+//                }
+//            })
+    
+        self.tableView.reloadData()
+        
+    }
+    
     private func loadCompetitions() {
         
         var userId = String()
@@ -137,11 +160,6 @@ class CompetitionTableViewController: UITableViewController {
                     if let dict = snapshot.value as? NSDictionary {
                         
                         let competition_list = (dict["teams"]! as! NSDictionary).allValues
-                        print("################# Current user list of competitionids: ")
-                        print(competition_list)
-//                        let team = dict["team"]! as! String
-                        
-                
                         for team in competition_list {
                         
                             // Check team1
@@ -149,13 +167,8 @@ class CompetitionTableViewController: UITableViewController {
                                 .queryOrdered(byChild: "team1")
                                 .queryEqual(toValue: team)
                                 .observe(.value, with: {(snapshot : FIRDataSnapshot) in
-                                    if let dict = snapshot.value as? NSDictionary {
-                                        for comp in dict.allValues {
-                                            var compData = comp as! NSDictionary
-                                            var newComp = [compData["team1"]!, compData["team2"]!]
-                                            self.competitions.append(newComp as! [String])
-                                        }
-                                        self.tableView.reloadData()
+                                    if let comp_dict = snapshot.value as? NSDictionary {
+                                        self.addCompetition(dict: comp_dict)
                                     }
                                     
                                     // Check team2
@@ -163,14 +176,8 @@ class CompetitionTableViewController: UITableViewController {
                                         .queryOrdered(byChild: "team2")
                                         .queryEqual(toValue: team)
                                         .observe(.value, with: {(snapshot : FIRDataSnapshot) in
-                                            if let dict = snapshot.value as? NSDictionary {
-                                                for comp in dict.allValues {
-                                                    var compData = comp as! NSDictionary
-                                                    var newComp = [compData["team1"]!, compData["team2"]!]
-                                                    self.competitions.append(newComp as! [String])
-                                                }
-                                                print(self.competitions)
-                                                self.tableView.reloadData()
+                                            if let comp_dict = snapshot.value as? NSDictionary {
+                                                self.addCompetition(dict: comp_dict)
                                             }
                                         })
                                 })
